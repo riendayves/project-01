@@ -5,15 +5,17 @@
 #+STARTUP: showeverything entitiespretty
 #+SETUPFILE: ../theme-bigblow.setup
 
-Contributors: Kathryn Hollingshead, Paul Land
+Contributors: 
 
 * Common Core 
 ** Basic Cryptographic Methods / Definitions
    ●	Confidentiality
+   
    ○	This is the concept of ensuring that data is not readable or useable by 
       unauthorized users.
 
    ●	Integrity
+   
    ○	This is the protection of data from manipulation. It is the concept of 
       making sure data has not been modified.
 
@@ -129,7 +131,9 @@ Contributors: Kathryn Hollingshead, Paul Land
 ** One Other Classic Cipher
 *** Trifid
     -Research
+    
     -Theory
+    
     -Implementation
 
 ** RSA
@@ -142,4 +146,4 @@ Contributors: Kathryn Hollingshead, Paul Land
    What is this and how does it work?
 
 ** Cryptanalysis
-   Decipher two cipher texxts using an algorithm
+   Decipher two cipher texts using an algorithm.
