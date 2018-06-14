@@ -114,6 +114,21 @@ Contributors: Paul Land,
 *** Checker Implementation - ELISP
 ** Caesar Cipher
 *** Implementation - ELISP
+#+BEGIN_SRC elisp
+(setq alpha "abcdefghijklmnopqrstuvwxyz")
+(setq plainText "CATS")
+(setq key 5)
+(setq encrypt "")
+
+(setq num 0)
+(while (< num (length plainText))
+  (setq c (downcase (substring plainText num (+ num 1))))
+  (setq start (% (+ (- (aref c 0) 97) key) 26))
+  (setq encrypt (concat encrypt (substring alpha start (+ start 1))))
+  (princ (substring encrypt num (+ num 1)))
+  (incf num))
+
+#+END_SRC
 ** Vigenere Cipher
 *** Implementation - ELISP
 ** RSA Theory and Understanding
