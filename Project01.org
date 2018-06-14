@@ -143,7 +143,21 @@ Contributors: Paul Land, Nicki Caswell
  
 ** Caesar or Vigenere Cipher Proof of Insecurity
 ** One Other Classic Cipher
-*** Trifid
+*** Trifid - Kathryn Hollingshead and Paul Land
+    -Research
+    
+    -Theory
+    
+    -Implementation
+    
+*** Myszkowski - Justin Bengtson and Nicki Caswell
+    -Research
+    
+    -Theory
+    
+    -Implementation
+    
+*** Nicodemus - Taylor Matheny and Ryan Davis
     -Research
     
     -Theory
