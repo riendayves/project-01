@@ -115,27 +115,63 @@ Contributors: Paul Land, Nicki Caswell
 ** Caesar Cipher
 *** Implementation - ELISP
 #+BEGIN_SRC elisp
+(defun caesar (plainText key)
 (setq alpha "abcdefghijklmnopqrstuvwxyz")
-(setq plainText "CATS")
-(setq key 5)
 (setq encrypt "")
-
 (setq num 0)
 (while (< num (length plainText))
   (setq c (downcase (substring plainText num (+ num 1))))
-  (setq start (% (+ (- (aref c 0) 97) key) 26))
+  (setq start (% (+ (- (aref c 0) 97) key) (length alpha)))
   (setq encrypt (concat encrypt (substring alpha start (+ start 1))))
   (princ (substring encrypt num (+ num 1)))
-  (incf num))
-
+  (incf num)))
 #+END_SRC
+
+#+RESULTS:
+: caesar
+
+#+BEGIN_SRC elisp :results output
+(setq plainText "hello world")
+(setq key 5)
+
+(caesar plainText key)
+#+END_SRC
+
+#+RESULTS:
+: mjqqtsbtwqi
+
+#+BEGIN_SRC python :results output
+def caesar(text, shift):
+    abc = "a~b!c@d#e)f?g%h$i(.j;k l^m*n&o+=p{q]r}s[t,u<v> w\"x\'y\\z"
+    cipher = {}
+
+
+    for i in range(0, len(abc)):
+        cipher[abc[i]] = abc[(i + shift) % len(abc)]
+
+    cipherText = ""
+
+    for c in text:
+        cipherText += cipher[c]
+    return cipherText
+
+# This is to test the ceasar cipher
+cipher_text = caesar("cout << \"hello world\" << endl;", 5)
+print(cipher_text)
+plain_text = caesar(cipher_text, -5)
+print(plain_text)
+#+END_SRC
+
+#+RESULTS:
+: )qw>y""yzj%&&qy\q,&?zy""y%p?&m
+: cout << "hello world" << endl;
 
 ** Vigenere Cipher
 *** Implementation - ELISP
 #+BEGIN_SRC elisp
+(defun vigenere (plainText key)
+
 (setq alpha "abcdefghijklmnopqrstuvwxyz")
-(setq plainText "HelloMyNameIsInigo")
-(setq key "abcdef")
 (setq encrypt "")
 
 (setq num 0)
@@ -147,8 +183,21 @@ Contributors: Paul Land, Nicki Caswell
   (setq encrypt (concat encrypt (substring alpha start (+ start 1))))
   (princ (substring encrypt num (+ num 1)))
   (incf num))
-
+)
 #+END_SRC
+
+#+RESULTS:
+: vigenere
+
+#+BEGIN_SRC elisp :results output 
+(setq plainText "HelloMyNameIsInigo")
+(setq key "abcdef")
+
+(vigenere plainText key)
+#+END_SRC
+
+#+RESULTS:
+: hfnosryocpinsjplkt
 
 ** RSA Theory and Understanding
 *** Number Theory Principles Involved
