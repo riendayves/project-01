@@ -1,0 +1,145 @@
+#+TITLE: DM1 Project 01
+#+LANGUAGE: en
+#+OPTIONS: H:4 num:nil toc:nil \n:nil @:t ::t |:t ^:t *:t TeX:t LaTeX:t
+#+OPTIONS: html-postamble:nil
+#+STARTUP: showeverything entitiespretty
+#+SETUPFILE: ../theme-bigblow.setup
+
+Contributors: Kathryn Hollingshead, Paul Land
+
+* Common Core 
+** Basic Cryptographic Methods / Definitions
+   ●	Confidentiality
+   ○	This is the concept of ensuring that data is not readable or useable by 
+      unauthorized users.
+
+   ●	Integrity
+   ○	This is the protection of data from manipulation. It is the concept of 
+      making sure data has not been modified.
+
+   ●	Non-repudiation
+   ○	This describes when a user is unable to say that they did not do 
+      something after they have done it. It is like a signature of 
+      authentication that shows that a person performed or approved an action.
+
+   ●	Authentication
+   ○	This is the proving of an identity of someone. This can be by showing 
+      physical credentials like an ID card, using an authentication key, or 
+      entering a password.
+
+   ●	Steganography
+   ○	This is the concealing or hiding of messages. It can be done in many 
+      different ways such as using invisible inks or even typing messages 
+      with the text being the same color as the background.
+
+   ●	Cryptography
+   ○	The art and science of hiding messages and securing communication so 
+      that only authorized people receive the communication.
+
+   ●	Symmetric-key
+   ○	This is when the same key is used to encrypt and decrypt a message. 
+      A user will use an encryption key to encrypt a message, and the person 
+      that receives the message must use that same key to decrypt it.
+
+   ●	Block Ciphers
+   ○	This is a method of encrypting plaintext by applying an algorithm with 
+      an cryptographic key to a block of bits rather than one at a time.
+
+   ●	Stream Ciphers
+   ○	This is a method of encrypting plaintext by applying an algorithm with 
+      an cryptographic key one bit at a time. It uses a pseudorandom stream 
+      of bits for the key. 
+
+   ●	Public Key
+   ○	A public key is a key that can be used by anyone to encrypt a message, 
+      but the message cannot be decrypted using the public key.
+
+   ●	Private Key
+   ○	A private key is used by a person to decrypt messages that were encrypted 
+      using that person’s public key. This ensures that only the holder of the 
+      private key is able to read the messages encrypted with the public key.
+
+   ●	The Enigma Machine
+   ○	This was a mechanical, typewriter-like machine used by the Germans during 
+      World War II to encrypt messages for the German army.
+
+   ●	True Randomness
+   ○	This is randomness that has absolutely no logical or intellectual 
+      reasoning for a sequence. There is not pattern or predictability. True 
+      randomness cannot be calculated, so in software and cryptography, 
+      pseudorandomness is used to calculate or produce seemingly random data.
+
+   ●	Kerckhoff’s Principle
+   ○	A cryptographic system should remain secure even if unauthorized people 
+      were to know everything about the system besides the key.
+
+   ●	Ciphertext
+   ○	This is a message in its encrypted form.
+
+   ●	Plaintext
+   ○	This is a message as it is intended to be read or otherwise consumed. 
+      It is how a message is before being encrypted into what is seemingly 
+      gibberish.
+
+   ●	Digital Signature
+   ○	This is a mathematical scheme for proving that electronics messages or 
+      documents are authentic.
+
+   ●	GPG
+   ○	GNU Privacy Guard is a hybrid-encryption software used for secure key 
+      exchange.
+
+   ●	HSM
+   ○	A Hardware Security Module is a physical computing device that is used 
+      for managing digital cryptokeys and can do cryptoprocessing.
+
+   ●	SHA
+   ○	The Secure Hashing Algorithms are a family of hashing algorithms that are 
+      that are used for encrypting data.
+
+   ●	Key Exchange
+   ○	This is a way to have secure communications by exchanging encryption 
+      keys that are public and private in order to establish a secure line of 
+      communication without. This describes any method that is used to do 
+      secure key exchange.
+
+** The Enigma Machine
+   Which two groups cracked it? 
+   
+   Who did it first? 
+   
+   What is the method each group used?
+
+** Password Strength Security
+*** Checker Implementation - ELISP
+** Caesar Cipher
+*** Implementation - ELISP
+** Vigenere Cipher
+*** Implementation - ELISP
+** RSA Theory and Understanding
+*** Number Theory Principles Involved
+    
+
+* Option 1
+  *Modern Software Applications*
+  Purpose - apply discrete mathematics directly into a current industry and 
+  build a portfolio worthy project.
+ 
+** Caesar or Vigenere Cipher Proof of Insecurity
+** One Other Classic Cipher
+*** Trifid
+    -Research
+    -Theory
+    -Implementation
+
+** RSA
+*** Implementation (C++ or Python)
+*** Questions with Solutions
+*** Key Terms
+*** Examples
+
+** AES
+   What is this and how does it work?
+
+** Cryptanalysis
+   Decipher two cipher texxts using an algorithm
