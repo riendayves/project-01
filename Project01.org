@@ -10,12 +10,10 @@ Contributors:
 * Common Core 
 ** Basic Cryptographic Methods / Definitions
    ●	Confidentiality
-   
    ○	This is the concept of ensuring that data is not readable or useable by 
       unauthorized users.
-
+      
    ●	Integrity
-   
    ○	This is the protection of data from manipulation. It is the concept of 
       making sure data has not been modified.
 
@@ -124,6 +122,7 @@ Contributors:
 
 * Option 1
   *Modern Software Applications*
+  
   Purpose - apply discrete mathematics directly into a current industry and 
   build a portfolio worthy project.
  
