@@ -139,16 +139,10 @@ Contributors: Paul Land, Nicki Caswell
 (setq encrypt "")
 
 (setq num 0)
-
 (while (< num (length plainText))
   (setq c (downcase (substring plainText num (+ num 1))))
   (setq shiftIt (% num (length key))) ;index of key that determines shift
   (setq shift (- (aref  key shiftIt) 97)) ;amount to shift plainText by
-  ;(princ "shift: ")
-  ;(princ shift)
-  ;(princ "\nnum: ")
-  ;(princ num)
-  ;(princ "\n")
   (setq start (% (+ (- (aref c 0) 97) shift) 26)) ;index of alpha
   (setq encrypt (concat encrypt (substring alpha start (+ start 1))))
   (princ (substring encrypt num (+ num 1)))
