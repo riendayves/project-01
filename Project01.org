@@ -104,11 +104,29 @@ Contributors: Paul Land, Nicki Caswell
       secure key exchange.
 
 ** The Enigma Machine
-   Which two groups cracked it? 
+   *Which two groups cracked it?* 
    
-   Who did it first? 
+   A Polish group and a British group cracked the Enigma machine at different 
+   times.
    
-   What is the method each group used?
+   The most well known codebreakers for the Polish group are Jerzy Rozycki, 
+   Henryk Zygalski, and Marian Rejewski. These men were mathematicians that 
+   were hired to work for the Polish General Staff's Cipher Bureau. Initially 
+   mathematicians were not used to break code, but the Polish thought it 
+   might be a good idea and tried it out. 
+
+   The British later hired mathematicians to help with code breaking. As a 
+   result, the British group came to consist of Alan Turning, Gordon Welchman, 
+   and a few other people. This was team 'Hut 8' and worked at Bletchley.
+ 
+   *Who did it first?*
+   
+   The Polish group cracked the Enigma Machine first in 1932 while the British 
+   group did not have success with cracking the Enigma Machine until 1940.
+   
+   *What is the method each group used?*
+   
+   
 
 ** Password Strength Security
 *** TODO Checker Implementation - ELISP
