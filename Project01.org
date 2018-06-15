@@ -111,7 +111,69 @@ Contributors: Paul Land, Nicki Caswell
    What is the method each group used?
 
 ** Password Strength Security
-*** Checker Implementation - ELISP
+*** TODO Checker Implementation - ELISP
+
+#+BEGIN_SRC python :results output
+def passwordChecker(password):
+    # Number of each type of character
+    lower = 0
+    upper = 0
+    digit = 0
+    symbol = 0
+
+    # Number of passwords a modern computer can compute per second 
+    checksPerSec = 588235 
+    
+    # Update the number of of each type of character
+    for c in password:
+        if c.isupper():
+            upper = 26
+        elif c.islower():
+            lower = 26
+        elif c.isdigit():
+            digit = 10
+        else:
+            symbol = 33
+
+    # Get total number of characters in our set
+    total = lower + upper + digit + symbol
+
+    # Get the number of possible permutations
+    numPermutation = total ** len(password)
+    
+    # Calculate seconds to brute force password in the worst case
+    seconds = (numPermutation / checksPerSec)
+
+    # Seconds if password is brute forced in half the time
+    halfSeconds = seconds / 2
+
+    secondsPerYear = 525600 * 60
+    
+    years = halfSeconds / secondsPerYear
+    
+    print("Number of years to brute force password:", years)
+
+    if years > 1000:
+        print("Very Strong Password")
+    elif years > 500:
+        print("Strong Password")
+    elif years > 50:
+        print("Average Password")
+    elif years > 25:
+        print("Weak Password")
+    else:
+        print("Password is very weak!")
+     
+    return (seconds, halfSeconds)
+
+passwordChecker("password")
+    
+#+END_SRC
+
+#+RESULTS:
+: Number of years to brute force password: 0.005628586175835452
+: Password is very weak!
+
 ** Caesar Cipher
 *** Implementation - ELISP
 #+BEGIN_SRC elisp
