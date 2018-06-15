@@ -5,7 +5,7 @@
 #+STARTUP: showeverything entitiespretty
 #+SETUPFILE: ../theme-bigblow.setup
 
-Contributors: Paul Land, Nicki Caswell
+Contributors: Paul Land, Nicki Caswell, Kathryn Hollingshead
 
 * Common Core 
 ** Basic Cryptographic Methods / Definitions
