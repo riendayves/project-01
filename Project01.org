@@ -105,6 +105,7 @@ Contributors: Paul Land, Nicki Caswell
 
 ** The Enigma Machine
    *Which two groups cracked it?* 
+   
    A Polish group and a British group cracked the Enigma machine at different 
    times.
    
@@ -119,10 +120,13 @@ Contributors: Paul Land, Nicki Caswell
    and a few other people. This was team 'Hut 8' and worked at Bletchley.
  
    *Who did it first?*
+   
    The Polish group cracked the Enigma Machine first in 1932 while the British 
    group did not have success with cracking the Enigma Machine until 1940.
    
-   *What is the method each group used?
+   *What is the method each group used?*
+   
+   
 
 ** Password Strength Security
 *** Checker Implementation - ELISP
