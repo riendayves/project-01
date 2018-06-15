@@ -105,7 +105,6 @@ Contributors: Paul Land, Nicki Caswell
 
 ** The Enigma Machine
    *Which two groups cracked it?* 
-   
    A Polish group and a British group cracked the Enigma machine at different 
    times.
    
@@ -116,16 +115,79 @@ Contributors: Paul Land, Nicki Caswell
    might be a good idea and tried it out. 
 
    The British later hired mathematicians to help with code breaking. As a 
-   result, the British group came to consist of Alan Turning, Gordon Welchman, 
-   and a few other people. This was team 'Hut 8' and worked at Bletchley.
+   result, the British group came to consist of Alan Turing, Gordon Welchman, 
+   and a few other people who also worked at Bletchley Park.
  
    *Who did it first?*
-   
    The Polish group cracked the Enigma Machine first in 1932 while the British 
    group did not have success with cracking the Enigma Machine until 1940.
    
    *What is the method each group used?*
+   The Polish group focused on a mathematical approach to break the Enigma 
+   Machine. They first used the characteristics method to find patterns  
+   from some of the German message senders. This helped them to be able to solve 
+   the six permutations that the Germans used to encipher their messages or in 
+   other words find the key to the cipher. No information was needed about the 
+   machine in order to accomplish this. 
+
+   Next they used the Theory of Permutations and Groups along with the help of 
+   two German Engima manuals and two pages of monthly keys to find out how the 
+   Enigma scrambler was wired. Rejewski later found that the military Enigma 
+   that the Germans were using was not the same as the commercial Enigma they 
+   had access to. As a result the ring and keyboard settings were different. 
+   He guessed that the order was alphabetical and was correct. With this 
+   information they were able to make replicas of the Engima machine called 
+   "Enigma doubles". 
+
+   Next they used the grill method to find the daily keys for the ciphers as 
+   well as use this method to find the rightmost rotor and its position. The 
+   grill method was also used to determine the plugboard wiring. They next set 
+   out to use a cycle-length method instead of a grill method in order to find 
+   cycles in the permutations. This resulted in them working to make a card 
+   catalog to index the cycle-lengths which lead to the creation of a 
+   cyclometer which was used to make the catalog. 
+
+   When the characteristics method no longer worked for getting the message key, 
+   they were able to use the Zygalski sheet method instead. This used perforated
+   sheets to find the possible six wheel orders. This method uses the occurences
+   of females. Females occur when the message key is given twice but is 
+   enciphered differently and there is a letter that occurs twice and in the 
+   same place as in the previous message key. For example, if the plaintext is 
+   ABC and the cipher text (message key), being sent twice, is PCK ZEK 
+   (PCK = ABC and ZEK = ABC), then a female has occurred because K showed up 
+   twice and in the same position (third position in this case). 
+
+   They later resorted to using an electro-mechanical device called the Bomba 
+   which was invented by Rejewski. The Bomba used females to get key message, 
+   but only needed an occurence of 3 females to uncode the message key instead 
+   of the 10 females that the Zygalski sheet method needed to solve the same 
+   problem. 
+
    
+   The British group were given information from the Polish before the war 
+   began. This greatly helped the British in breaking the Enigma machine. 
+   Turing used the crib (known or guessed plaintext found in an encrypted 
+   method) to solve the Enigma machine. The crib that was found would later 
+   be used with an electro-mechanical device that Turing based off of the Bomba. 
+   This machine would compare a crib to a ciphertext based off of the wheel 
+   order that was set. Its function was to stop when a contradiction wasn't 
+   present between the crib and the ciphertext. This would minimize the 
+   possibilities to what the solution was and eventually lead to the "correct 
+   plaintext of the whole message" [1]. 
+   
+   Turing also used probability analysis to estimate the "number of stops per 
+   rotor order" [1] in order to avoid wasting time on menus (specified 
+   relationship of the cib and ciphertext) that "were likely to yield to an 
+   excessive number of false stops" [1]. Later Welchman invented a diagnol 
+   board that increased the "number of steps needed for the codebreaking 
+   effort" [2].
+
+   Sources: 
+   [1] https://en.wikipedia.org/wiki/Cryptanalysis_of_the_Enigma
+   
+   [2] http://www.cryptomuseum.com/crypto/bombe/index.htm
+
+   [3] https://www.codesandciphers.org.uk/virtualbp/poles/poles.htm
    
 
 ** Password Strength Security
