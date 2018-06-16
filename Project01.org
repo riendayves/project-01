@@ -408,6 +408,27 @@ print(plain_text)
 
 ** AES
    What is this and how does it work?
-
+   AES stands for Advanced Encryption Standard and is a symmetric block cipher used by the U.S.
+   Government to protect classified information. It is used throughout the world to encrypt sensitive
+   data. AES uses symmetric key algorithm (Rijndael), and becamse thr first publicly accessible and open cipher
+   approved by the NSA for top-secret information.
+   
+   so how does AES work?
+   it comptises three cipher blocks: AES-128, AES-192 and AES-256, which each encrypt and decrypt data in
+   blocks of 128 bits using cryptographic keys of 128-, 192- and 256-bits.
+   When sending a message, the user and the sender must both know a "secret key" in order to encrypt and
+   decrypt the message.
+   
+   The first step of the cipher is to put the data into an array, after which the cipher transformations are
+   repeated over a number of encryption rounds. The number of rounds is determined by the key length.
+   
+   In the first round of transformation, a substitution table is used to "substitute" the data. The second
+   round of transformation shifts the data rows and the third round mixes up the columns. The final transformation
+   uses the XOR operator on each colum with a different part of the encryption key. Therefore, longer keys
+   need more rounds to complete.
+   
+   AES has proven to be a reliable sifer and the only practical, successful attacks against AES have
+   leveraged side-channel attacks on weaknesses found in the implemenation or key manafement of specific AES-based
+   encryption products.
 ** Cryptanalysis
    Decipher two cipher texts using an algorithm.
