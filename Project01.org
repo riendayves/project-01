@@ -96,6 +96,7 @@ Contributors: Paul Land, Nicki Caswell, Kathryn Hollingshead
    ●	SHA
    ○	The Secure Hashing Algorithms are a family of hashing algorithms that are 
       that are used for encrypting data.
+      https://en.wikipedia.org/wiki/Secure_Hash_Algorithms
 
    ●	Key Exchange
    ○	This is a way to have secure communications by exchanging encryption 
@@ -343,7 +344,32 @@ print(plain_text)
 
 ** RSA Theory and Understanding
 *** Number Theory Principles Involved
-    
+    First, let's explain RSA on a high level. RSA uses two keys for encryption:
+    a public key and a private key. Both of these keys can be used for encrypting
+    and decrypting messages, but they can only be used for one or the other on a 
+    particular message. We'll get into the details of how those keys are generated
+    later, but for now let's discuss how the encryption process works overall.
+
+    Let's say that Paul has a message that he needs to email to Kathryn. If Paul
+    wanted to encrypt this message so that only Kathryn could read it, he would
+    use Kathyrn's public key to encrypt the message. Since the message has been
+    encrypted using the public key, only Kathryn's private key will be able to 
+    decrypt the message. As long as Kathryn keeps her private key a secret, no
+    one else will be able to decrypt messages that are sent to her.
+
+    Now let's suppose Kathryn needed to send out an important message, but she
+    also wanted others to be able to verify that the message came from her.
+    Kathryn would be able to encrypt her message using her private key, and 
+    everyone else would be able to decrypt the message using her public key that
+    is freely available. Since the message was able to be decrypted using Kathryn's
+    public key, it verifies that the message came from her!
+
+    This encryption using private and public keys is like having a mailbox that
+    other's can put letters into while you have the only key to open the mailbox
+    and get the letters inside. The mailbox is like your public key and the key
+    to your mailbox is like the private key.
+
+    Now let's discuss how the keys are securely generated.
 
 * Option 1
   *Modern Software Applications*
