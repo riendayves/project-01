@@ -407,14 +407,12 @@ print(plain_text)
     to the bottom row until the entire grid for that layer is filled. This 
     repeats for the next two layers starting from where the last layer left off. 
     
-    Ex. 
-        |   | Layer 1   |   |   | Layer 2   |   |   | Layer 3   |
-        
-        
-        |   | 1 | 2 | 3 |   |   | 1 | 2 | 3 |   |   | 1 | 2 | 3 |
-        | 1 | B | O | Y |   | 1 | H | I | J |   | 1 | R | S | T |
-        | 2 | A | C | D |   | 2 | K | L | M |   | 2 | U | V | W |
-        | 3 | E | F | G |   | 3 | N | P | Q |   | 3 | X | Z | # |
+    Ex.       
+                                
+        | *Layer 1*  | 1 | 2 | 3 |   | *Layer 2*   | 1 | 2 | 3 |   | *Layer 3*  | 1 | 2 | 3 |
+        | 1          | B | O | Y |   | 1           | H | I | J |   | 1          | R | S | T |
+        | 2          | A | C | D |   | 2           | K | L | M |   | 2          | U | V | W |
+        | 3          | E | F | G |   | 3           | N | P | Q |   | 3          | X | Z | # |
 
     These layers allow us to find the coordinates, or numbers, that represent 
     each letter and allow us to follow through with encrypting the plaintext. 
