@@ -407,7 +407,6 @@ print(plain_text)
     to the bottom row until the entire grid for that layer is filled. This 
     repeats for the next two layers starting from where the last layer left off. 
     
-<<<<<<< HEAD
     Ex. | Layer 1       |   |Layer 2        |   |Layer 3        |
         |   | 1 | 2 | 3 |   |   | 1 | 2 | 3 |   |   | 1 | 2 | 3 |
         | 1 | B | O | Y |   | 1 | H | I | J |   | 1 | R | S | T |
