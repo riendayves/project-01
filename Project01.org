@@ -385,7 +385,86 @@ print(plain_text)
     -Theory
     
     -Implementation
+#+BEGIN_SRC python :results output
+def index(row, column):
+    return 3 * row + column
+
+def trifid(plainText, key):
+    # Remove the plaintext spaces and make uppercase
+    plainText = plainText.replace(" ", "")   
+    plainText = plainText.upper()
+
+    abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#"
+
+    # Remove the key spaces and make uppercase
+    key = key.remove(" ", "")
+    key = key.upper()
     
+    # Set for the cipher key
+    keySet = []
+
+    # Add all of the unique letters from the key to the key set
+    for c in key:
+        if c not in keySet:
+            keySet.append(c)
+
+    # Add the rest of the alphabet to the key set.
+    for c in abc:
+        if c not in keySet:
+            keySet.append(c)
+    
+        
+    # Set up the 3x3 layers matrices
+    layer1 = []
+    layer2 = []
+    layer3 = []
+    for i in range(0, 9):
+        layer1.append(keySet.pop())
+    for i in range(0, 9):
+        layer2.append(keySet.pop())
+    for i in range(0, 9):
+        layer3.append(keySet.pop())
+    
+    letterToNum = {} 
+    numToLetter = {}
+    for c in abc:
+        for row in range(0, 3):
+            for col in range(0, 3):
+                if c in layer1:
+                    if layer1[index(row, col)] == c:
+                        num = "1"
+                        num += str(row)
+                        num += str(col)
+                        letterToNum[c] = num
+                        numToLetter[num] = c
+                        row = 4
+                        col = 4
+                elif c in layer2:
+                    if layer2[index(row, col)] == c:
+                        num = "2"
+                        num += str(row)
+                        num += str(col)
+                        letterToNum[c] = num
+                        numToLetter[num] = c
+                        row = 4
+                        col = 4
+                elif c in layer3:
+                    if layer3[index(row, col)] == c:
+                        num = "3"
+                        num += str(row)
+                        num += str(col)
+                        letterToNum[c] = num
+                        numToLetter[num] = c
+                        row = 4
+                        col = 4
+
+        
+
+
+#+END_SRC 
+
+   #+RESULTS:
+
 *** Myszkowski - Justin Bengtson and Nicki Caswell
     -Research
     
