@@ -380,12 +380,131 @@ print(plain_text)
 ** Caesar or Vigenere Cipher Proof of Insecurity
 ** One Other Classic Cipher
 *** Trifid - Kathryn Hollingshead and Paul Land
-    -Research
+    *Research*
     
-    -Theory
+    The trifid cipher was created around 1902 by Felix Delastelle. This cipher 
+    is similar to the bifid cipher, which Felix had created in previous years. 
+    The difference between the bifid and the trifid is that the bifid uses a 
+    5x5 square (also known as a Polybius square) or a 6x6 square to create 
+    coordinates for each symbol/letter used in the plaintext. The trifid uses 
+    a 3x3x3 cube to turn each symbol/letter into coordinates. Both of these also 
+    use transposition to further encrypt the symbols/letters used for ciphering 
+    the plaintext. 
+
+    The trifid requires the use of a mixed alphabet with one symbol to have a 
+    total of 27 letters. The alphabet can be mixed in any way but the 
+    traditional way is to use a keyword or phrase to mix up the letters. This is 
+    done by taking the keyword (ex. BOBBY) and then, in order, take the unique 
+    letters (ex. BOY) and use them as the beginning of the mixed alphabet. Then 
+    follow the unique letters with the rest of the alphabet in its natural 
+    order (ex. BOYACDEFGHIJKLMNPQRSTUVWXZ#). The symbol at the end can be any 
+    type of symbol. Some people use a period (.), a pound symbol (#), or follow 
+    Felix in using a plus sign (+). 
+
+    After a mixed alphabet has been created, it is placed into three separate 
+    layers that are each composed into a 3x3 grid. The mixed alphabet is then 
+    placed in the first layer until one row at a time starting from the top row 
+    to the bottom row until the entire grid for that layer is filled. This 
+    repeats for the next two layers starting from where the last layer left off. 
     
-    -Implementation
-#+BEGIN_SRC python :results output
+<<<<<<< HEAD
+    Ex. | Layer 1       |   |Layer 2        |   |Layer 3        |
+        |   | 1 | 2 | 3 |   |   | 1 | 2 | 3 |   |   | 1 | 2 | 3 |
+        | 1 | B | O | Y |   | 1 | H | I | J |   | 1 | R | S | T |
+        | 2 | A | C | D |   | 2 | K | L | M |   | 2 | U | V | W |
+        | 3 | E | F | G |   | 3 | N | P | Q |   | 3 | X | Z | # |
+
+    These layers allow us to find the coordinates, or numbers, that represent 
+    each letter and allow us to follow through with encrypting the plaintext. 
+    
+    Ex. |Mixed Alphabet| B O Y A C D E F G H I J K L M N P Q R S T U V W X Z # |
+        |Layer #       | 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 |
+        |Row #         | 1 1 1 2 2 2 3 3 3 1 1 1 2 2 2 3 3 3 1 1 1 2 2 2 3 3 3 |
+        |Column #      | 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 |
+
+    The plaintext can now be represented by each letter's associated set of 
+    numbers in a vertical manner. 
+    
+    Ex. Plaintext: This is a story
+
+        T H I S I S A S T O R Y
+        3 2 2 3 2 3 1 3 3 1 3 1
+        1 1 1 1 1 1 1 1 1 1 1 1 
+        3 1 2 2 2 2 1 2 3 2 1 3
+
+    A period length of 5 - 20 is generally used to divide the plaintext and 
+    its associated set of numbers into groups. 
+
+    Ex. Period length: 5
+
+        | T H I S I | S A S T O | R Y |
+        | 3 2 2 3 2 | 3 1 3 3 1 | 3 1 |
+        | 1 1 1 1 1 | 1 1 1 1 1 | 1 1 |
+        | 3 1 2 2 2 | 2 1 2 3 2 | 1 3 |
+
+        The last group (R Y) has a period length of 2 because there are not 
+        enough letters to extend it to a period of 5. 
+        
+    Each group is now read hoizontally in groups of 3. The entire group 
+    must be read before moving onto the next group. If there are not enough 
+    numbers on a line to finish a group of three within the main group, then 
+    the beginning numbers on the next line down are taken from that line 
+    and are grouped with the ones above to complete a group of three numbers. 
+
+    Ex. | Group 1   | Group 2   | Group 3|
+        | T H I S I | S A S T O | R Y    |
+        | 3 2 2 3 2 | 3 1 3 3 1 | 3 1    |
+        | 1 1 1 1 1 | 1 1 1 1 1 | 1 1    |
+        | 3 1 2 2 2 | 2 1 2 3 2 | 1 3    |
+
+        |Group 1| 3 2 2 | 3 2 1 | 1 1 1 | 1 3 1 | 2 2 2 |
+        |Group 2| 3 1 3 | 3 1 1 | 1 1 1 | 1 2 1 | 2 3 2 |
+        |Group 3| 3 1 1 | 1 1 3 |
+
+    Next we translate all the three digit codes in each main group to their 
+    respective letter according to our original mapping. 
+
+    Ex. |Mixed Alphabet| B O Y A C D E F G H I J K L M N P Q R S T U V W X Z # |
+        |Layer #       | 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 |
+        |Row #         | 1 1 1 2 2 2 3 3 3 1 1 1 2 2 2 3 3 3 1 1 1 2 2 2 3 3 3 |
+        |Column #      | 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 1 2 3 |
+
+        | Group 1 | V | U | B | E | L |
+        | Group 2 | T | R | B | A | P |
+        | Group 3 | R | Y |
+
+    Now we must group the new letters into groups of five.
+
+    Ex. Plaintext:  This is a story
+        Ciphertext: VUBEL TRBAP RY
+
+    To decrypt the ciphertext, you need to take the cipertext and write out each 
+    letter's associated number set horizontally using the original period length.
+    And then translate each column to its associated letter. 
+
+     Ex. |         |   V   |   U   |   B   |   E   |   L   |
+         | Group 1 | 3 2 2 | 3 2 1 | 1 1 1 | 1 3 1 | 2 2 2 |
+
+         |         |   T   |   R   |   B   |   A   |   P   |
+         | Group 2 | 3 1 3 | 3 1 1 | 1 1 1 | 1 2 1 | 2 3 2 |
+
+         |         |   R   |   Y   |
+         | Group 3 | 3 1 1 | 1 1 3 |
+
+         | Group 1   | Group 2   | Group 3 |
+         | 3 2 2 3 2 | 3 1 3 3 1 | 3 1     |
+         | 1 1 1 1 1 | 1 1 1 1 1 | 1 1     |
+         | 3 1 2 2 2 | 2 1 2 3 2 | 1 3     |
+         | T H I S I | S A S T O | R Y     |
+
+
+    *Theory*
+
+
+
+    *Implementation*
+
+ #+BEGIN_SRC python :results output
 def index(row, column):
     return 3 * row + column
 
@@ -399,7 +518,7 @@ def trifid(plainText, key):
     # Remove the key spaces and make uppercase
     key = key.remove(" ", "")
     key = key.upper()
-    
+   
     # Set for the cipher key
     keySet = []
 
@@ -487,6 +606,27 @@ def trifid(plainText, key):
 
 ** AES
    What is this and how does it work?
-
+   AES stands for Advanced Encryption Standard and is a symmetric block cipher used by the U.S.
+   Government to protect classified information. It is used throughout the world to encrypt sensitive
+   data. AES uses symmetric key algorithm (Rijndael), and becamse thr first publicly accessible and open cipher
+   approved by the NSA for top-secret information.
+   
+   so how does AES work?
+   it comptises three cipher blocks: AES-128, AES-192 and AES-256, which each encrypt and decrypt data in
+   blocks of 128 bits using cryptographic keys of 128-, 192- and 256-bits.
+   When sending a message, the user and the sender must both know a "secret key" in order to encrypt and
+   decrypt the message.
+   
+   The first step of the cipher is to put the data into an array, after which the cipher transformations are
+   repeated over a number of encryption rounds. The number of rounds is determined by the key length.
+   
+   In the first round of transformation, a substitution table is used to "substitute" the data. The second
+   round of transformation shifts the data rows and the third round mixes up the columns. The final transformation
+   uses the XOR operator on each colum with a different part of the encryption key. Therefore, longer keys
+   need more rounds to complete.
+   
+   AES has proven to be a reliable sifer and the only practical, successful attacks against AES have
+   leveraged side-channel attacks on weaknesses found in the implemenation or key manafement of specific AES-based
+   encryption products.
 ** Cryptanalysis
    Decipher two cipher texts using an algorithm.
