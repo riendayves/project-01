@@ -643,18 +643,12 @@ def trifid(plainText, key):
 ** Cryptanalysis
    Decipher two cipher texts using an algorithm.
    
-   Both are 'tranditional vigenere ciphers'.  
-   
-   That is all uppercase letters are converted to lower and all non-alphabetic entries are ignored.
+   Both are 'tranditional vigenere ciphers'. That is all uppercase letters are converted to lower and all non-alphabetic entries are ignored.
 
    *YOU MUST:*
    
-   Crack the Cipher
+   -Crack the Cipher.
    
-      Create an algorithm for deciphering it
+   -Create an algorithm for deciphering it. You don't need to create 1 algorithm to do it all or the exploration, but you must         be able to show your work. Give a solid explanation of how you figured it out!
       
-      You don't need to create 1 algorithm to do it all or the exploration, but you must be able to show your work.
-      
-      Give a solid explanation of how you figured it out!
-      
-      *Link to Ciphertext:* https://github.com/katholli/DM1-Project01/blob/master/benning-bytes.org
+    *Link to Ciphertext:* https://github.com/katholli/DM1-Project01/blob/master/benning-bytes.org
