@@ -5,7 +5,7 @@
 #+STARTUP: showeverything entitiespretty
 #+SETUPFILE: ../theme-bigblow.setup
 
-Contributors: Paul Land, Nicki Caswell, Kathryn Hollingshead
+Contributors: Paul Land, Nicki Caswell, Kathryn Hollingshead, Ryan Davis
 
 * Common Core 
 ** Basic Cryptographic Methods / Definitions
@@ -280,6 +280,46 @@ Contributors: Paul Land, Nicki Caswell, Kathryn Hollingshead
 
 #+RESULTS:
 : mjqqtsbtwqi
+
+
+*** Implementation 2 - keeps spaces and punctuation.
+#+BEGIN_SRC elisp
+(defun caesar-encrypt (stream num)
+       (setq asciiv (mapcar 'vector (mapcar 'downcase stream)))
+       (setq ascii (mapcar (lambda (arg) (elt arg 0)) asciiv))
+       (setq i 0)
+       (setq shift (list 0))
+       (while (< i (length ascii))
+       (if (and (< (elt ascii i) 123) (> (elt ascii i) 96))
+          (setq shift (append shift (list (+ (% (+ (- (elt ascii i) 97) num) 26) 97))))
+          (setq shift (append shift (list (elt ascii i))))
+          )
+       (incf i)
+       )
+
+       (setq ident (mapcar (lambda (arg) (vector arg)) (cdr shift)))
+       (setq x (mapconcat 'identity ident ""))
+       x
+
+)
+(defun caesar-decrypt (decry num)
+       (caesar-encrypt decry (- 26 num))
+)
+(caesar-encrypt "Descrete math is challenging, but when you work hard it can be fun!" 3)
+#+end_src
+
+#+RESULTS:
+: ghvfuhwh pdwk lv fkdoohqjlqj, exw zkhq brx zrun kdug lw fdq eh ixq!
+
+#+BEGIN_SRC elisp
+(caesar-decrypt "ghvfuhwh pdwk lv fkdoohqjlqj, exw zkhq brx zrun kdug lw fdq eh ixq!" 3)
+
+#+END_SRC
+
+#+RESULTS:
+: descrete math is challenging, but when you work hard it can be fun!
+
+
 
 #+BEGIN_SRC python :results output
 
