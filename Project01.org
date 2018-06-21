@@ -481,6 +481,7 @@ print(plain_text)
     Now we must group the new letters into groups of five.
 
     Ex. 
+    
     Plaintext:  This is a story
     
     Ciphertext: VUBEL TRBAP RY
