@@ -480,8 +480,10 @@ print(plain_text)
 
     Now we must group the new letters into groups of five.
 
-    Ex. Plaintext:  This is a story
-        Ciphertext: VUBEL TRBAP RY
+    Ex. 
+    Plaintext:  This is a story
+    
+    Ciphertext: VUBEL TRBAP RY
 
     To decrypt the ciphertext, you need to take the cipertext and write out each 
     letter's associated number set horizontally using the original period length.
