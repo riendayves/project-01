@@ -482,9 +482,9 @@ print(plain_text)
 
     Ex. 
     
-    Plaintext:  This is a story
+    *Plaintext:*  This is a story
     
-    Ciphertext: VUBEL TRBAP RY
+    *Ciphertext:* VUBEL TRBAP RY
 
     To decrypt the ciphertext, you need to take the cipertext and write out each 
     letter's associated number set horizontally using the original period length.
