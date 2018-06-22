@@ -642,7 +642,79 @@ def trifid(plainText, key):
     -Theory
     
     -Implementation
+    #+BEGIN_SRC cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+   string plainText = "The Tomato is a Plant in the Nightshade Family";   
+   string key = "tomato";
+   string NS_text = ""; //text after spaces have been removed
+   
+   //remove spaces and set to lowercase
+   for (int i = 0; i < plainText.length(); i++){
+       char c = tolower(plainText[i]);
+       if ((int)c != 32){
+           NS_text += c;
+       }
+   }
+   
+   //get number of rows in matrix
+   int matrixY = NS_text.length() / key.length();
+   matrixY += (NS_text.length() % key.length() ? 1 : 0);
+   
+   //create matrix
+   string * matrix = new string[matrixY];
+   
+   for (int i = 0; i < NS_text.length(); i += key.length())
+       matrix[i / (key.length())] = NS_text.substr(i, key.length());
+   
+   //calculate number of x's
+   int numLetter = key.length() - (key.length()*matrixY - NS_text.length());
+   
+   //put x's in empty spots of last row
+   for (int i = numLetter; i < key.length(); i++)
+        matrix[matrixY - 1] += "x";
+ 
+    //create matrix to hold index of each column
+   int * mI = new int[key.length()];
+   for (int i = 0; i < key.length(); i++){
+       mI[i] = 0;   //set all index to start at 0
+   }
+   
+   //empty string to hold encrypted order of text
+   string order = "";
+   
+   //fill in order with encryption text
+   for (int i = 0; i < 26; i++) //for every letter of alphabet
+       for(int k = 0; k < matrixY; k++) //for each row of matrix
+            for(int j = 0; j < key.length(); j++)   //for each column of matrix
+                if(((int)key[j] - 97) == i){
+                    order += matrix[mI[j]][j];
+                    mI[j] = mI[j] + 1;
+                }
     
+    cout << "Plain Text: " << plainText
+         << "\nKey: " << key
+         << "\nEncryption: ";
+    for (int i = 0; i < order.length(); i++){
+        if ((i) % 5 == 0 && i)
+            cout << " ";
+        cout << order[i];
+    }
+    
+   return 0;
+}
+    #+END_SRC    
+
+    #+RESULTS:
+    | Plain       | Text:  | The   | Tomato | is    | a     | Plant | in    | the   | Nightshade | Family |
+    | Key:        | tomato |       |        |       |       |       |       |       |            |        |
+    | Encryption: | tines  | axeoa | htfxh  | mtali | tihae | iyxto | asptn | nghdm | lx         |        |
+
 *** Nicodemus - Taylor Matheny and Ryan Davis
     -Research
     
