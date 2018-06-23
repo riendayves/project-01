@@ -639,8 +639,86 @@ def trifid(plainText, key):
 *** Myszkowski - Justin Bengtson and Nicki Caswell
     -Research
     
+    Encryption is amongst of the most important ways today that personal and other important information is protected, 
+    but where did the idea of encryption come from originally and what was it originally used for? Like most other advances 
+    in science and technology war was the fuel that was needed to start using encryption so that messages can be delivered 
+    without the fear of it being understood by those who were listening who were enemies of the ones sending messages to their allies. 
+    Let us dive in more into the history of using these methods, and in specific talk about the Myszkowski cipher and its origins.
+
+    Like most methods of encryption in cryptography, transposition ciphers were historically used in war time for sending encoded 
+    messages to troops. Double transposition ciphers were used by the Germans in World War I, as well as by the Allied and Axis Powers 
+    during World War II. During this time, multiple anagramming was discovered as a way to find the key of a double transposition cipher 
+    if the same key was used more than once. The Myszkowski cipher was invented by Émile Victor Théodore Myszkowski in 1902, 
+    who began to use a keyword with recurring letters as an additional security measure. 
+
+    The Myszkowski cipher works similarly to the Columnar Transposition (because it is based off the Columnar), 
+    in which it is performed by using a matrix. The number of columns of the matrix is determined by the secret key. 
+    The Myszkowski Transposition requires a secret key that is usually a word (or any sequence of letters) 
+    and it should be converted into a sequence of numbers. The numbers are defined by an alphabetical 
+    order of the letters in the keyword. The letter which is first in the alphabet will be the number 1, 
+    the second in alphabetical order being 2 and so on. Unlike the Columnar Transposition, the keyword 
+    has to contain some recurrent letters. Identical letters should have the same numbers assigned 
+    (which is again, different from the Columnar Transposition). 
+
     -Theory
     
+    Now, here’s how to use this cipher including the encrypting and decrypting of a message. 
+    Starting with encrypting we need to insert all the letters (from the message) into a
+    matrix row by row, from left to right, and the size of the matrix will depend 
+    on the length of the message. The only known dimension is the width, which is determined 
+    by the length of the secret keyword (which is the same as the length of the corresponding sequence of numbers) 
+    and known to both sides of the communication. For decrypting a message there are four steps 
+    involved in this process. First, knowing the secret keyword, and length of the received message,
+    the able of the same size, as the one used for encryption, should be created. Second, the ciphertext 
+    should entered into columns, from the leftmost columns to the rightmost column, from top to bottom. 
+    The columns with the same numbers should be filled together, row by row. Then the columns should be 
+    rearranged and put into the order defined by the keyword. Lastly, the decrypted message should read out, 
+    row by row, starting from the top row, and from left to right.
+
+    Now, this all sounds wonderful, but like all other ciphers this one is not without its flaws. 
+    Since transposition does not affect the frequency of individual symbols, simple transposition 
+    can be easily detected by the cryptanalyst by doing a frequency count. If the ciphertext exhibits
+    a frequency distribution very similar to plain text, it is most likely a transposition. 
+    This can then often be attacked by anagramming – sliding pieces of the ciphertext around, 
+    then looking for sections that look like anagrams of English words and solving the anagrams. 
+    One such anagrams have been found, they reveal information about the transposition pattern, 
+    and can consequently be extended.
+
+    Simpler transpositions also often suffer from the property that keys very close to the correct 
+    key will reveal long sections of legible plaintext interspersed by gibberish. Consequently, 
+    such ciphers may be vulnerable to optimum seeking algorithms such as genetic algorithms.
+
+    Here's an Example:
+
+    For example, let's encrypt a message A Midsummer Night's Dream, which is a comedy written 
+    by Shakespeare (this is the same message we encrypted with the Columnar Transposition). 
+    We will use the secret key mentioned above. The number sequence derived from 
+    this keyword is 5623143, so the matrix created for the encryption will have seven columns.
+    After removing all non-letter characters, and changing the letters to upper case, 
+    the message should be entered into the table:
+
+    5	6	2	3	1	4	3
+    A	M	I	D	S	U	M
+    M	E	R	N	I	G	H
+    T	S	D	R	E	A	M
+
+    There are numbers derived from the keyword written above the message. 
+    These numbers determine the order, in which the columns should be read 
+    (top to bottom), and appended to the produced ciphertext. In our example, 
+    the first column will be SIE, and the second will be IRD. Then, there are 
+    two columns which have threes assigned: DNR and MHM. The letters from 
+    them should be read off row by row, starting from the top. All the 
+    remaining columns should be dealt with in a usual way. 
+    The produced ciphertext is:
+  
+    SIE IRD DMNHRM UGA AMT MES
+
+    Finally, after removing the spaces, which were added to indicate 
+    separate columns, we receive the encrypted message:
+  
+    SIEIRDDMNHRMUGAAMTMES
+
+
     -Implementation
     #+BEGIN_SRC cpp
 #include <iostream>
