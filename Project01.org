@@ -417,7 +417,8 @@ print(plain_text)
 
     Then we calculate an integer n to be the product of p and q:
 
-********* n = p * q, where p and q are large primes
+********* n = p * q
+********** Where p and q are large primes
     
     We also need 2 more integers, e and d. The number e will be used for 
     the public key function and d will be used for the private key function.
@@ -425,18 +426,18 @@ print(plain_text)
     the \phi function, or Euler's Totient Function:
 
 ********* \phi(n) = (p - 1)(q - 1)
-
-    This function gives the number of positvie integers not exceeding n.
+********** This function gives the number of positvie integers not exceeding n
 
     Now to select a value for e, we must follow this rule:
 
 ********* gcd(e, \phi(n)) = 1
+********** Rule for selecting a value for e
     
     The value of e can be any integer so long as the greatest common divisor
     of e and \phi(n) is 1. In other words, e and \phi(n) must be relatively prime,
     or coprime.
 
-    To find the value of d, we make use of the following:
+    To find the value of d, we make use of the following definition:
 
 ********* e * d \equiv 1 (mod \phi(n))
     
@@ -448,9 +449,48 @@ print(plain_text)
 ********* rsaPublic(m)  = m^e mod n 
 ********* rsaPrivate(m) = m^d mod n
     
-    With these
+    With these functions, we are able to do encryption and signatures:
+
+********* m = rsaPrivate(rsaPublic(m))
+********** This is encryption
+
+********* m = rsaPublic(rsaPrivate(m))
+********** This is signature
        
+    This is the theory of RSA, and now we will prove that the previous two equations
+    are true.
+
+    From those previous equations and by using the definitions of the RSA functions and
+    the rules of modular arithmetic, we get the following:
+
+********* rsaPrivate(rsaPublic(m)) = (m^e mod n)^d mod n = m^ed mod n
+********* rsaPublic(rsaPrivate(m))  = (m^d mod n)^d mod n = m^ed mod n
     
+    This shows that the encryption and signature functions are equivalent.
+
+********* rsaPrivate(rsaPublic(m)) = rsaPublic(rsaPrivate(m))
+
+    Next we must prove that m = m^ed mod n.
+
+    By using modular arithmetic for modular congruence, we can modify an 
+    equation, which we defined previously, to be as follows:
+
+********* e * d \equiv 1 (mod \phi(n)) \rightarrow \phi(n) | ed - 1, the value of \phi(n) divides ed - 1
+
+    Because n = p * q and we know that p and q are coprime, basic number theory
+    principles help us to manipulate that equation as follows:
+
+********* \phi(n) = \phi(pq) = \phi(p)\phi(q) 
+********** Using number theory, manipulate our original \phi(n) function
+           
+********* \phi(p)\phi(q) | ed - 1 
+********** Now replace the \phi(n) in \phi(n) | ed - 1
+
+********* \phi(p) | ed - 1
+********* \phi(q) | ed - 1
+********** Using number theory principles, we can split the previous equation 
+    
+
 * Option 1
   *Modern Software Applications*
   
