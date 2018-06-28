@@ -1216,44 +1216,44 @@ Tables
 ** RSA
 *** Implementation (C++ or Python)
 #+BEGIN_SRC elisp :results silent
-(defun gcd (x y)
-   (while (/= (* x y) 0)
-      (setq x (% x y))
-      (if (/= x 0) (setq y (% y x))))
-   (if (/= x 0)
+(defun gcd (x y)          ;uses Euclid's algorithm gcd(x,y) = gcd(y, x mod y)
+   (while (/= (* x y) 0)  ;loop until one is 0. 0 * anything is 0.
+      (setq x (% x y))    ;gcd(y, *x mod y*)
+      (if (/= x 0) (setq y (% y x)))) ;does in reverse unless gcd has already been found
+   (if (/= x 0)                       ;sets no zero to gcd
    (setq gcd x)
    (setq gcd y))
-gcd
+gcd                                    ;returns gcd
 )
 
-(defun RSA-key () 
+(defun RSA-key ()                         ;gives a working RSA encryption and decryption key
    (setq primes (number-sequence 2 200 1))
    (setq i 0)
-   (while (< i (length primes))
+   (while (< i (length primes))                ;makes a list of primenumbers
       (setq j 2)
       (while (< j (length primes))
          (delete (* (elt primes i) j) primes)
          (incf j))
    (incf i)
    )
-(setq p (elt primes (random (length primes))))
+(setq p (elt primes (random (length primes)))) ;randomly selects 2 numbers from that list
 (setq q (elt primes (random (length primes))))
-(setq n (* p q))
+(setq n (* p q))                               ;calculates n and the totient
 (setq ET (* (- p 1) (- q 1)))
 (setq e (- ET 5))
-(while (and (< e ET) (/= (gcd e ET) 1))
+(while (and (< e ET) (/= (gcd e ET) 1))        ;selects an e that meets the stipulations
    (setq e (random ET)))
 
 (setq a ET)
 (setq b e)
 (setq y 2)
 (setq xlog '())
-(while (/= y 1)
-   (setq y (% a b))
-   (setq x (- (/ a b) (/ (% a b) b)))  
-   ;(setq log (append log (list (list a b x y))))
+(while (/= y 1)                                ;first part of Euclidean Algorithm
+   (setq y (% a b))                            ;T=x(e)+y
+   (setq x (- (/ a b) (/ (% a b) b)))          
+   ;(setq log (append log (list (list a b x y)))) ;useful for debugging
    (setq xlog (append (list x) xlog))
-   (setq a b)
+   (setq a b)                                  ;shifts e and y to be the numbers of interest
    (setq b y)
 )
 
@@ -1261,17 +1261,17 @@ gcd
 (setq dl 1)
 (setq i (length xlog))
 (setq log2 (list '()))
-(while (> i 0)
-   (setq dn (+ (* (pop xlog) d) dl))
-   (setq dl d)
-   (setq d dn)
+(while (> i 0)                            ;second part or the Extended Euclidean Algorithm
+   (setq dn (+ (* (pop xlog) d) dl))      ;multiplies the current d by x and adds the previous
+   (setq dl d)                            ;d which is the combining of like terms step in the
+   (setq d dn)                            ;equation method. 
    (setq log2 (append log2 (list (list d))))
    (setq i (- i 1))
 )
-(if (= (% (length log2) 2) 1)
+(if (= (% (length log2) 2) 1)            ;handles the negative case
    (setq d (- ET d)))
 
-(setq key (list (list "e" "d" "n") (list e d n)))
+(setq key (list (list "e" "d" "n") (list e d n))) ;returns the encrytion and decryption keys
 key
 )
 ;(RSA-key)
@@ -1281,8 +1281,8 @@ key
 (defun RSA (e n plain)
    (setq i 0)
    (setq plainlistns plain)
-   ;(setq asciiv (mapcar 'vector (downcase plain)))
-   ;(setq ascii (mapcar (lambda (arg) (elt arg 0)) asciiv)) 
+   ;(setq asciiv (mapcar 'vector (downcase plain)))           ;optional conversion from letters
+   ;(setq ascii (mapcar (lambda (arg) (elt arg 0)) asciiv))   ;to numbers removing spaces.
    ;(while (< i (length ascii))
       ;(if (/= (elt ascii i) 32) 
         ; (setq plainlistns (append plainlistns (list (- (elt ascii i) 97)))))
@@ -1297,25 +1297,27 @@ key
       (setq j 0)
       (setq x 1)
       (setq etemp e)
-      (if (< e 12)
+;assuming that 26 is the largest number being encrypted 12 is the highest power emacs can 
+;handle on its own. Watch out for case when your key is less then 12 but number is larger than
+;46. This optimization will not hold in these cases. 
+      (if (< e 12) 
          (setq x (% (expt (elt plainlistns i) e) n))
          (while (> etemp 0)
             (if (> etemp 1)
-               (setq x (* x (% (expt (elt plainlistns i) 2) n)))
-               (setq x (* x (% (expt (elt plainlistns i) etemp) n))))
-            (setq x (% x n))
-(setq test (append test (list x)))
-            (setq etemp (- etemp 2)) 
+ ;m^e mod n broken up into squares. This evaluates m^e mod n while avoiding overflow
+               (setq x (* x (% (expt (elt plainlistns i) 2) n)))  
+               (setq x (* x (% (expt (elt plainlistns i) etemp) n))))  
+            (setq x (% x n))                                          
+            (setq etemp (- etemp 2)) ;counts how many squares to do                             
          ))
-      (setq crypt (append crypt (list x)))
+      (setq crypt (append crypt (list x))) ;puts each encoded or decoded number in a list
       (incf i)
    )
-   (setq disp (append (list plainlistns) (list crypt)))
-   disp
-
-
+crypt
+   ;(setq disp (append (list plainlistns) (list crypt))) ;attatches the original text and 
+   ;disp                            ;encrypted/decrypted text together then displays them
+                                    ;if used remove ":results raw" from code block
 )
-;(RSA 1069 1349 '(5 4 1 2 8 5 8 9 2 0))
 #+END_SRC
 
 #+BEGIN_SRC elisp
@@ -1323,24 +1325,23 @@ key
 #+END_SRC
 
 #+RESULTS:
-|   e |  d |   n |
-| 191 | 39 | 394 |
+|    e |    d |     n |
+| 9851 | 1971 | 10057 |
 
-#+BEGIN_SRC elisp
-(RSA 191 394 '(5 4 1 2 8 5 8 9 2 0))
+#+BEGIN_SRC elisp :results raw
+(RSA 9851 10057 '(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15))
 #+END_SRC
 
 #+RESULTS:
-|   5 |  4 | 1 |   2 |   8 |   5 |   8 |   9 |   2 | 0 |
-| 321 | 96 | 1 | 314 | 200 | 321 | 200 | 309 | 314 | 0 |
+(1 2200 5670 2583 988 3320 8652 395 6728 1288 1230 2618 6224 6556 211)
 
-#+BEGIN_SRC elisp
-(RSA 39 394 '(321 96 1 314 200 321 200 309 314 0))
+#+BEGIN_SRC elisp :results raw
+(RSA 1971 10057 '(1 2200 5670 2583 988 3320 8652 395 6728 1288 1230 2618 6224 6556 211))
 #+END_SRC
 
 #+RESULTS:
-| 321 | 96 | 1 | 314 | 200 | 321 | 200 | 309 | 314 | 0 |
-|   5 |  4 | 1 |   2 |   8 |   5 |   8 |   9 |   2 | 0 |
+(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15)
+
 
 
 *** Questions with Solutions
