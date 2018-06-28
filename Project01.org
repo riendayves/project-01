@@ -350,52 +350,6 @@ print(plain_text)
 : cout << "hello world" << endl;
 
 
-*** Proof of Insecurity
-   This cipher is insecure becuase there are only 26 different shifts. This 
-   program quickly displays every possible shift and since there are only 26 
-   options it is easy to look for recognisable words.
-   
-#+BEGIN_SRC elisp
-(defun caesar-break (stream)
-   (setq pos (list (list "start")))
-   (setq ii 0)
-   (while (< ii 26)
-      (setq pos (append pos (list (list (caesar-encrypt stream ii)))))
-      (incf ii)
-      )
-    (cdr pos)
-)
-(caesar-break "ghvfuhwh pdwk lv fkdoohqjlqj, exw zkhq brx zrun kdug lw fdq eh ixq!")
-#+END_SRC
-
-#+RESULTS:
-| ghvfuhwh pdwk lv fkdoohqjlqj, exw zkhq brx zrun kdug lw fdq eh ixq! |
-| hiwgvixi qexl mw gleppirkmrk, fyx alir csy asvo levh mx ger fi jyr! |
-| ijxhwjyj rfym nx hmfqqjslnsl, gzy bmjs dtz btwp mfwi ny hfs gj kzs! |
-| jkyixkzk sgzn oy ingrrktmotm, haz cnkt eua cuxq ngxj oz igt hk lat! |
-| klzjylal thao pz johsslunpun, iba dolu fvb dvyr ohyk pa jhu il mbu! |
-| lmakzmbm uibp qa kpittmvoqvo, jcb epmv gwc ewzs pizl qb kiv jm ncv! |
-| mnblancn vjcq rb lqjuunwprwp, kdc fqnw hxd fxat qjam rc ljw kn odw! |
-| nocmbodo wkdr sc mrkvvoxqsxq, led grox iye gybu rkbn sd mkx lo pex! |
-| opdncpep xles td nslwwpyrtyr, mfe hspy jzf hzcv slco te nly mp qfy! |
-| pqeodqfq ymft ue otmxxqzsuzs, ngf itqz kag iadw tmdp uf omz nq rgz! |
-| qrfpergr zngu vf punyyratvat, ohg jura lbh jbex uneq vg pna or sha! |
-| rsgqfshs aohv wg qvozzsbuwbu, pih kvsb mci kcfy vofr wh qob ps tib! |
-| sthrgtit bpiw xh rwpaatcvxcv, qji lwtc ndj ldgz wpgs xi rpc qt ujc! |
-| tuishuju cqjx yi sxqbbudwydw, rkj mxud oek meha xqht yj sqd ru vkd! |
-| uvjtivkv drky zj tyrccvexzex, slk nyve pfl nfib yriu zk tre sv wle! |
-| vwkujwlw eslz ak uzsddwfyafy, tml ozwf qgm ogjc zsjv al usf tw xmf! |
-| wxlvkxmx ftma bl vateexgzbgz, unm paxg rhn phkd atkw bm vtg ux yng! |
-| xymwlyny gunb cm wbuffyhacha, von qbyh sio qile bulx cn wuh vy zoh! |
-| yznxmzoz hvoc dn xcvggzibdib, wpo rczi tjp rjmf cvmy do xvi wz api! |
-| zaoynapa iwpd eo ydwhhajcejc, xqp sdaj ukq skng dwnz ep ywj xa bqj! |
-| abpzobqb jxqe fp zexiibkdfkd, yrq tebk vlr tloh exoa fq zxk yb crk! |
-| bcqapcrc kyrf gq afyjjclegle, zsr ufcl wms umpi fypb gr ayl zc dsl! |
-| cdrbqdsd lzsg hr bgzkkdmfhmf, ats vgdm xnt vnqj gzqc hs bzm ad etm! |
-| descrete math is challenging, but when you work hard it can be fun! |
-| eftdsfuf nbui jt dibmmfohjoh, cvu xifo zpv xpsl ibse ju dbo cf gvo! |
-| fguetgvg ocvj ku ejcnngpikpi, dwv yjgp aqw yqtm jctf kv ecp dg hwp! |
-
 
 
 
@@ -553,6 +507,52 @@ print(plain_text)
   build a portfolio worthy project.
  
 ** Caesar or Vigenere Cipher Proof of Insecurity
+*** Caesar Proof of Insecurity
+   This cipher is insecure becuase there are only 26 different shifts. This 
+   program quickly displays every possible shift and since there are only 26 
+   options it is easy to look for recognisable words.
+   
+#+BEGIN_SRC elisp
+(defun caesar-break (stream)
+   (setq pos (list (list "start")))
+   (setq ii 0)
+   (while (< ii 26)
+      (setq pos (append pos (list (list (caesar-encrypt stream ii)))))
+      (incf ii)
+      )
+    (cdr pos)
+)
+(caesar-break "ghvfuhwh pdwk lv fkdoohqjlqj, exw zkhq brx zrun kdug lw fdq eh ixq!")
+#+END_SRC
+
+#+RESULTS:
+| ghvfuhwh pdwk lv fkdoohqjlqj, exw zkhq brx zrun kdug lw fdq eh ixq! |
+| hiwgvixi qexl mw gleppirkmrk, fyx alir csy asvo levh mx ger fi jyr! |
+| ijxhwjyj rfym nx hmfqqjslnsl, gzy bmjs dtz btwp mfwi ny hfs gj kzs! |
+| jkyixkzk sgzn oy ingrrktmotm, haz cnkt eua cuxq ngxj oz igt hk lat! |
+| klzjylal thao pz johsslunpun, iba dolu fvb dvyr ohyk pa jhu il mbu! |
+| lmakzmbm uibp qa kpittmvoqvo, jcb epmv gwc ewzs pizl qb kiv jm ncv! |
+| mnblancn vjcq rb lqjuunwprwp, kdc fqnw hxd fxat qjam rc ljw kn odw! |
+| nocmbodo wkdr sc mrkvvoxqsxq, led grox iye gybu rkbn sd mkx lo pex! |
+| opdncpep xles td nslwwpyrtyr, mfe hspy jzf hzcv slco te nly mp qfy! |
+| pqeodqfq ymft ue otmxxqzsuzs, ngf itqz kag iadw tmdp uf omz nq rgz! |
+| qrfpergr zngu vf punyyratvat, ohg jura lbh jbex uneq vg pna or sha! |
+| rsgqfshs aohv wg qvozzsbuwbu, pih kvsb mci kcfy vofr wh qob ps tib! |
+| sthrgtit bpiw xh rwpaatcvxcv, qji lwtc ndj ldgz wpgs xi rpc qt ujc! |
+| tuishuju cqjx yi sxqbbudwydw, rkj mxud oek meha xqht yj sqd ru vkd! |
+| uvjtivkv drky zj tyrccvexzex, slk nyve pfl nfib yriu zk tre sv wle! |
+| vwkujwlw eslz ak uzsddwfyafy, tml ozwf qgm ogjc zsjv al usf tw xmf! |
+| wxlvkxmx ftma bl vateexgzbgz, unm paxg rhn phkd atkw bm vtg ux yng! |
+| xymwlyny gunb cm wbuffyhacha, von qbyh sio qile bulx cn wuh vy zoh! |
+| yznxmzoz hvoc dn xcvggzibdib, wpo rczi tjp rjmf cvmy do xvi wz api! |
+| zaoynapa iwpd eo ydwhhajcejc, xqp sdaj ukq skng dwnz ep ywj xa bqj! |
+| abpzobqb jxqe fp zexiibkdfkd, yrq tebk vlr tloh exoa fq zxk yb crk! |
+| bcqapcrc kyrf gq afyjjclegle, zsr ufcl wms umpi fypb gr ayl zc dsl! |
+| cdrbqdsd lzsg hr bgzkkdmfhmf, ats vgdm xnt vnqj gzqc hs bzm ad etm! |
+| descrete math is challenging, but when you work hard it can be fun! |
+| eftdsfuf nbui jt dibmmfohjoh, cvu xifo zpv xpsl ibse ju dbo cf gvo! |
+| fguetgvg ocvj ku ejcnngpikpi, dwv yjgp aqw yqtm jctf kv ecp dg hwp! |
+
 ** One Other Classic Cipher
 *** Trifid - Kathryn Hollingshead and Paul Land
     *Research*
