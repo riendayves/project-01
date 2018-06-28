@@ -841,8 +841,7 @@ int main()
     order of the columns based on alphebetical order of the key. For our example we have a and so 
     that will be the new first column(see table 2). The we use a viginere cipher on each letter in
     the column using the key column letter as our shift (see table 3). 
-
-*Tables
+Tables
 | 1 |   |   |   | -------- | 2 |   |   |   | -------- | 3 |   |   |   |
 | m | a | t | h | -------- | a | h | m | t | -------- | a | h | m | t |
 | - | - | - | - |          | - | - | - | - |          | - | - | - | - |
@@ -861,7 +860,7 @@ int main()
 | f | f |   |   |          | f |   | f |   |          | f |   | r |   |
 
        After making these tables you take letters of the columns in table 3 in groups of 5 from 
-left to right. Table 3 ordered would be as follows:
+    left to right. Table 3 ordered would be as follows:
       "eeceh vllhp iheff ewkfp htbin yluni fadzm uaxgw orfol dqrmg"
 
     -Theory
