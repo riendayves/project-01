@@ -410,7 +410,47 @@ print(plain_text)
     to your mailbox is like the private key.
 
     Now let's discuss how the keys are securely generated.
+    
+    We first select 2 distinct prime numbers p and q. These primes should be 
+    fairly large to increase the difficulty of a brute force attack on the RSA
+    communication.
 
+    Then we calculate an integer n to be the product of p and q:
+
+********* n = p * q, where p and q are large primes
+    
+    We also need 2 more integers, e and d. The number e will be used for 
+    the public key function and d will be used for the private key function.
+    Before we show how to generate the values for e and d, we need to define
+    the \phi function, or Euler's Totient Function:
+
+********* \phi(n) = (p - 1)(q - 1)
+
+    This function gives the number of positvie integers not exceeding n.
+
+    Now to select a value for e, we must follow this rule:
+
+********* gcd(e, \phi(n)) = 1
+    
+    The value of e can be any integer so long as the greatest common divisor
+    of e and \phi(n) is 1. In other words, e and \phi(n) must be relatively prime,
+    or coprime.
+
+    To find the value of d, we make use of the following:
+
+********* e * d \equiv 1 (mod \phi(n))
+    
+    Using modular arithemetic, we can find a suitable value for d.
+
+    With the integers n, e, and d, we can define the encryption and decryption
+    RSA functions where m is the message and 0 \le m \lt n:
+
+********* rsaPublic(m)  = m^e mod n 
+********* rsaPrivate(m) = m^d mod n
+    
+    With these
+       
+    
 * Option 1
   *Modern Software Applications*
   
