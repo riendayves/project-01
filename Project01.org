@@ -855,6 +855,8 @@ def trifid(plainText, key):
 
 
     -Implementation
+
+Encrpytion
     #+BEGIN_SRC cpp
 #include <iostream>
 #include <string>
@@ -927,6 +929,97 @@ int main()
     | Plain       | Text:  | The   | Tomato | is    | a     | Plant | in    | the   | Nightshade | Family |
     | Key:        | tomato |       |        |       |       |       |       |       |            |        |
     | Encryption: | tines  | axeoa | htfxh  | mtali | tihae | iyxto | asptn | nghdm | lx         |        |
+
+Decryption
+#+BEGIN_SRC cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string removeSpaces(string spaceText){
+    
+    string NS_text = "";
+    
+    for (int i = 0; i < spaceText.length(); i++){
+       if ((int)spaceText[i] != 32)
+            NS_text += spaceText[i];
+   }
+   
+   return NS_text;
+}
+
+int main()
+{
+   string plainText = "";
+   string key = "tomato";
+   string encrypt = "tines axeoa htfxh mtali tihae iyxto asptn nghdm lx";
+ 
+   //remove spaces from encrypt
+   string NS_encrypt = removeSpaces(encrypt);
+   
+   //create matrix to hold plainText
+   int numRows = NS_encrypt.length() / key.length();
+   string * matrix = new string[numRows];
+   
+   for (int i = 0; i < numRows; i++){
+       string str = "";
+       for (int j = 0; j < key.length(); j++){
+           str += '0';
+       }
+       matrix[i] = str;
+   }
+   
+   //create matrix to hold index of each column
+   int * mI = new int[key.length()];
+   for (int i = 0; i < key.length(); i++){
+       mI[i] = 0;   //set all index to start at 0
+   }
+   
+   //index of encrypt
+   int encryptIndex = 0;
+   
+   // fill matrix with plainText
+   for (int i = 0; i < 26; i++) //for every letter of alphabet
+       for(int k = 0; k < numRows; k++) //for each row of matrix
+            for(int j = 0; j < key.length(); j++)   //for each column of matrix
+                if(((int)key[j] - 97) == i){
+                    matrix[mI[j]][j] = NS_encrypt[encryptIndex];
+                    mI[j] = mI[j] + 1;
+                    encryptIndex++;
+                }
+    
+    // get (plainText + extra x's) from matrix
+    for (int i = 0; i < numRows; i++){
+        plainText += matrix[i];
+    }
+    
+    // remove extra x's from plainText
+    for (int i = plainText.length(); i > plainText.length() - key.length(); i--){
+        
+        if (plainText[i] == 'x')
+            plainText[i] = ' ';
+    }
+    
+    //display key, encrypt, and plainText
+    cout << "Decryption\n------------------------------------------------------------\n"
+         << "Encrypt: " << encrypt << endl
+         << "Key: " << key << endl
+         << "\nplainText: " << plainText << endl;
+
+    
+   return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+| Decryption                                                   |                                        |       |       |       |       |       |       |       |    |
+| ------------------------------------------------------------ |                                        |       |       |       |       |       |       |       |    |
+| Encrypt:                                                     | tines                                  | axeoa | htfxh | mtali | tihae | iyxto | asptn | nghdm | lx |
+| Key:                                                         | tomato                                 |       |       |       |       |       |       |       |    |
+|                                                              |                                        |       |       |       |       |       |       |       |    |
+| plainText:                                                   | thetomatoisaplantinthenightshadefamily |       |       |       |       |       |       |       |    |
+
 
 *** Nicodemus - Taylor Matheny and Ryan Davis
     -Research
