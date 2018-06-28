@@ -348,7 +348,13 @@ print(plain_text)
 #+RESULTS:
 : )qw>y""yzj%&&qy\q,&?zy""y%p?&m
 : cout << "hello world" << endl;
+
+
 *** Proof of Insecurity
+   This cipher is insecure becuase there are only 26 different shifts. This 
+   program quickly displays every possible shift and since there are only 26 
+   options it is easy to look for recognisable words.
+   
 #+BEGIN_SRC elisp
 (defun caesar-break (stream)
    (setq pos (list (list "start")))
