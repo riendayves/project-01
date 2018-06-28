@@ -1374,6 +1374,7 @@ crypt
    AES has proven to be a reliable cipher and the only practical, successful attacks against AES have
    leveraged side-channel attacks on weaknesses found in the implemenation or key manafement of specific AES-based
    encryption products.
+   (Rouse, Margaret. “What Is Advanced Encryption Standard (AES)? - Definition from WhatIs.com.” SearchSecurity, TechTarget, searchsecurity.techtarget.com/definition/Advanced-Encryption-Standard.)
    
 ** Cryptanalysis
    Decipher two cipher texts using an algorithm.
