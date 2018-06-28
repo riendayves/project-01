@@ -835,10 +835,144 @@ int main()
 
 *** Nicodemus - Taylor Matheny and Ryan Davis
     -Research
-    
+       To explain how this cipher works we will use the word "math" as our key and "we love 
+    descrete math with brother benning and brother neff" as our text. first we put our text into 
+    rows using the size of our key as the number of columns (see table 1). Then you change the
+    order of the columns based on alphebetical order of the key. For our example we have a and so 
+    that will be the new first column(see table 2). The we use a viginere cipher on each letter in
+    the column using the key column letter as our shift (see table 3). 
+
+| ---table 1--- | -------- | ---table 2--- | -------- | ---table 3--- |
+
+| m | a | t | h | -------- | a | h | m | t | -------- | a | h | m | t |
+| - | - | - | - |          | - | - | - | - |          | - | - | - | - |
+| w | e | l | o |          | e | o | w | l |          | e | v | i | e |
+| v | e | d | e |          | e | e | v | d |          | e | l | h | w |
+| s | c | r | e |          | c | e | s | r |          | c | l | e | k |
+| t | e | m | a |          | e | a | t | m |          | e | h | f | f |
+| t | h | w | i |          | h | i | t | w |          | h | p | f | p |
+| t | h | b | r |          | h | r | t | b |          | h | y | f | u |
+| o | t | h | e |          | t | e | o | h |          | t | l | a | a |
+| r | b | e | n |          | b | n | r | e |          | b | u | d | x |
+| n | i | n | g |          | i | g | n | n |          | i | n | z | g |
+| a | n | d | b |          | n | b | a | d |          | n | i | m | w |
+| r | o | t | h |          | o | h | r | t |          | o | o | d | m |
+| e | r | n | e |          | r | e | e | n |          | r | l | q | g |
+| f | f |   |   |          | f |   | f |   |          | f |   | r |   |
+
+       After making these tables you take letters of the columns in table 3 in groups of 5 from 
+left to right. Table 3 ordered would be as follows:
+      "eeceh vllhp iheff ewkfp htbin yluni fadzm uaxgw orfol dqrmg"
+
     -Theory
+       This Cipher combines the vigenere Cipher with column transposition to create more complex 
+    ecryption. It uses a symetric key in the form of a word. Other than how to preform the 
+    encryption, little is known about it. The math involved in a block cipher like this is pretty 
+    minimal. calculating the size of the block based on the key and plain text involves basic 
+    arithmatic. 
     
     -Implementation
+#+BEGIN_SRC elisp
+(defun nicodemus-encrypt (key plain)
+       (setq i 0)
+       (setq plainlistns '())
+       (setq asciiv (mapcar 'vector (downcase plain)))
+       (setq ascii (mapcar (lambda (arg) (elt arg 0)) asciiv)) 
+       (while (< i (length ascii))
+          (if (/= (elt ascii i) 32) 
+             (setq plainlistns (append plainlistns (list (elt ascii i)))))
+          (incf i)
+       )
+       (setq keylist (mapcar 'string key))
+       (setq keyvec (mapcar 'vector (mapcar 'downcase key)))
+       (setq keyvecnum (mapcar (lambda (arg) (- (elt arg 0) 97)) keyvec)) 
+      
+ 
+       (setq keynum 0)
+       (setq block (list (list 0)))
+       (while (< keynum (length keylist))
+          
+
+          (setq temp (list (elt keylist keynum)))
+          (setq num 0)
+          (while (< num (length plainlistns))     
+             (if (= (% num (length keylist)) keynum) 
+             (setq temp (append temp (list (elt plainlistns num)))))
+             (incf num)
+          )
+          (setq tempshift 
+             (mapcar 
+                (lambda (arg) 
+                   (+ 97 (% (+ (- arg 97) (elt keyvecnum keynum)) 26))) 
+             (cdr temp)))
+
+          (setq block (append block (list tempshift)))
+          temp
+          (incf keynum)
+       )
+       (setq block (cdr block))
+       
+       (setq i 0)
+       (setq keyord '())
+       (while (< i (length keyvecnum))
+          (setq j 0)
+          (setq lt 0)
+          (while (< j (length keyvecnum))
+             (if (> (elt keyvecnum i) (elt keyvecnum j)) (incf lt))
+             (incf j)
+          )
+          (setq j 0)
+          (setq dup 0)
+          (while (< j i)
+             (if (= (elt keyord j) lt) (incf lt))
+             (incf j)
+          ) 
+          (setq keyord (append keyord (list lt)))
+          (incf i)
+       )
+
+       (setq i 0)
+       (setq blockord (list 32))
+       (while (< i (length keyord))
+          (setq j 0)
+          (while (< j (length keyord))
+             (if (= (elt keyord j) i) (setq element j))
+             (incf j)
+          )
+          (setq blockord (append blockord (list (elt block element))))
+       (incf i)
+       )
+       (setq blockord (cdr blockord)) 
+       blockord
+       
+      
+       (setq i 0)
+       (setq temp '())
+       (while (< i (/ (length plainlistns) 5) )
+          (setq temp (append temp (list 32)))
+          (setq j 0)
+          (setq k (% i (length keyord)))
+          (while (< j 5)
+             (while (and (> (length (elt blockord k)) 0) (< j 5))
+                (setq temp (append temp (list (pop (elt blockord k)))))
+                (incf j))
+             (incf k))
+           (incf i)
+        )
+       (setq ciphid (mapcar (lambda (arg) (vector arg)) (cdr temp)))
+       (setq ciph (mapconcat 'identity ciphid ""))
+       ciph
+;block
+
+)
+;(list (list 1 2 3 4) (list 5 6 7 8))
+(nicodemus-encrypt "math" "we love descrete math with brother benning and brother neff")
+
+#+END_SRC
+
+#+RESULTS:
+: eeceh vllhp iheff ewkfp htbin yluni fadzm uaxgw orfol dqrmg
+
 
 ** RSA
 *** Implementation (C++ or Python)
