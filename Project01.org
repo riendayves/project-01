@@ -418,14 +418,14 @@ print(plain_text)
     and get the letters inside. The mailbox is like your public key and the key
     to your mailbox is like the private key.
 
-    Now let's discuss how the keys are securely generated.
+    Now let's discuss how the keys are securely generated and the proof behind
+    RSA encryption.
     
     We first select 2 distinct prime numbers p and q. These primes should be 
     fairly large to increase the difficulty of a brute force attack on the RSA
     communication.
 
     Then we calculate an integer n to be the product of p and q:
-
 ********* n = p * q
 ********** Where p and q are large primes
     
@@ -433,12 +433,10 @@ print(plain_text)
     the public key function and d will be used for the private key function.
     Before we show how to generate the values for e and d, we need to define
     the \phi function, or Euler's Totient Function:
-
 ********* \phi(n) = (p - 1)(q - 1)
-********** This function gives the number of positvie integers not exceeding n
+********** This function gives the number of positvie integers not exceeding n that are coprime to n
 
     Now to select a value for e, we must follow this rule:
-
 ********* gcd(e, \phi(n)) = 1
 ********** Rule for selecting a value for e
     
@@ -447,19 +445,16 @@ print(plain_text)
     or coprime.
 
     To find the value of d, we make use of the following definition:
-
 ********* e * d \equiv 1 (mod \phi(n))
     
     Using modular arithemetic, we can find a suitable value for d.
 
     With the integers n, e, and d, we can define the encryption and decryption
     RSA functions where m is the message and 0 \le m \lt n:
-
 ********* rsaPublic(m)  = m^e mod n 
 ********* rsaPrivate(m) = m^d mod n
     
     With these functions, we are able to do encryption and signatures:
-
 ********* m = rsaPrivate(rsaPublic(m))
 ********** This is encryption
 
@@ -471,7 +466,6 @@ print(plain_text)
 
     From those previous equations and by using the definitions of the RSA functions and
     the rules of modular arithmetic, we get the following:
-
 ********* rsaPrivate(rsaPublic(m)) = (m^e mod n)^d mod n = m^ed mod n
 ********* rsaPublic(rsaPrivate(m))  = (m^d mod n)^d mod n = m^ed mod n
     
@@ -483,22 +477,79 @@ print(plain_text)
 
     By using modular arithmetic for modular congruence, we can modify an 
     equation, which we defined previously, to be as follows:
-
 ********* e * d \equiv 1 (mod \phi(n)) \rightarrow \phi(n) | ed - 1, the value of \phi(n) divides ed - 1
 
     Because n = p * q and we know that p and q are coprime, basic number theory
     principles help us to manipulate that equation as follows:
-
 ********* \phi(n) = \phi(pq) = \phi(p)\phi(q) 
-********** Using number theory, manipulate our original \phi(n) function
+********** Using number theory principles, manipulate our original \phi(n) function
            
 ********* \phi(p)\phi(q) | ed - 1 
 ********** Now replace the \phi(n) in \phi(n) | ed - 1
 
 ********* \phi(p) | ed - 1
 ********* \phi(q) | ed - 1
-********** Using number theory principles, we can split the previous equation 
-    
+********** Using number theory principles, we can split the previous equation into two equations
+
+********* ed - 1 = k \phi(p)
+********** The equation \phi(p) | ed - 1 means that there must be some integer k that satisfies this equation
+
+********* \phi(p) = p - 1
+********** Because p is prime, the number of positive coprimes of p is just one less than p
+
+********* ed - 1 = k(p - 1)
+********** Replace \phi(p) with (p - 1)
+
+    Now we will look at the cases of any integer m to the power of ed mod p
+********* m^ed \equiv m^(ed-1+1) (mod p)
+********* m^ed \equiv (m^(ed-1)) m (mod p)
+********** Simplify the previous equation
+********* m^ed \equiv (m^(k(p-1))) m (mod p)
+********** Replace ed-1 with k(p-1)
+
+    Because p is a prime number, m can be any integer and be coprime to p or m will be
+    a multiple of p.
+********* gcd(p, m) = 1, or
+********* gcd(p, m) = p
+
+    We can use Fermi's Little Theorem in the case of m being coprime to p.
+********* m^(p-1) \equiv 1 (mod p)
+********** See definition of Fermi's Little Theorem in our keyterms section below TODO:ADD FLT DEFINITION IN RSA KEY TERM SECTION
+********* m^(k(p-1)) \equiv 1^k \equiv 1 (mod p)
+********** In modular arithmetic we can raise both sides to the same power
+********* m^ed \equiv m (mod p)
+********** We combine m^ed \equiv m^(k(p-1)) with m^(k(p-1)) \equiv 1 (mod p)
+
+    The other case is where m is a multiple of p. 
+********* p | m
+********** Since m is a multiple of p, p must divide m
+********* m^ed \equiv 0 (mod p)
+********** Because p | m, p must also be able to divide m^ed
+********* m^ed \equiv 0 \equiv m (mod p)
+********** m \equiv 0 (mod p) because p | m
+
+    Whether m is coprime to p or is a multiple of p, the following has been proven:
+********* m^ed \equiv m (mod p)
+
+    Using the same arguments as we did for p, we would be able to prove 
+    the same thing for q:
+********* m^ed \equiv m (mod q)
+
+    The integers p and q are prime, so they are guaranteed to be coprime to 
+    each other.
+********* m^ed \equiv m (mod pq) \equiv m (mod n)
+********** m^ed \equiv m (mod q) and m^ed \equiv m (mod p) can be combined because p and q are coprime
+********* m^ed \equiv m (mod n)
+********** Symmetry in modular arithmetic allows this
+
+    Since 0 \le m \lt n, there can only be one unique integer to satisfy the
+    congruence relation.
+********* m = m^ed mod n
+********** There is only one integer that satisfies the proven congruence relation
+
+    Thus, by proving that m = m^ed mod n, we have proven that
+********* rsaPrivate(rsaPublic(m)) = m
+********* rsaPublic(rsaPrivate(m)) = m
 
 * Option 1
   *Modern Software Applications*
