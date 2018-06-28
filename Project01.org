@@ -841,6 +841,7 @@ int main()
     order of the columns based on alphebetical order of the key. For our example we have a and so 
     that will be the new first column(see table 2). The we use a viginere cipher on each letter in
     the column using the key column letter as our shift (see table 3). 
+    
 Tables
 | 1 |   |   |   | -------- | 2 |   |   |   | -------- | 3 |   |   |   |
 | m | a | t | h | -------- | a | h | m | t | -------- | a | h | m | t |
