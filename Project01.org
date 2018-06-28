@@ -349,6 +349,61 @@ print(plain_text)
 : )qw>y""yzj%&&qy\q,&?zy""y%p?&m
 : cout << "hello world" << endl;
 
+
+*** Proof of Insecurity
+   This cipher is insecure becuase there are only 26 different shifts. This 
+   program quickly displays every possible shift and since there are only 26 
+   options it is easy to look for recognisable words.
+   
+#+BEGIN_SRC elisp
+(defun caesar-break (stream)
+   (setq pos (list (list "start")))
+   (setq ii 0)
+   (while (< ii 26)
+      (setq pos (append pos (list (list (caesar-encrypt stream ii)))))
+      (incf ii)
+      )
+    (cdr pos)
+)
+(caesar-break "ghvfuhwh pdwk lv fkdoohqjlqj, exw zkhq brx zrun kdug lw fdq eh ixq!")
+#+END_SRC
+
+#+RESULTS:
+| ghvfuhwh pdwk lv fkdoohqjlqj, exw zkhq brx zrun kdug lw fdq eh ixq! |
+| hiwgvixi qexl mw gleppirkmrk, fyx alir csy asvo levh mx ger fi jyr! |
+| ijxhwjyj rfym nx hmfqqjslnsl, gzy bmjs dtz btwp mfwi ny hfs gj kzs! |
+| jkyixkzk sgzn oy ingrrktmotm, haz cnkt eua cuxq ngxj oz igt hk lat! |
+| klzjylal thao pz johsslunpun, iba dolu fvb dvyr ohyk pa jhu il mbu! |
+| lmakzmbm uibp qa kpittmvoqvo, jcb epmv gwc ewzs pizl qb kiv jm ncv! |
+| mnblancn vjcq rb lqjuunwprwp, kdc fqnw hxd fxat qjam rc ljw kn odw! |
+| nocmbodo wkdr sc mrkvvoxqsxq, led grox iye gybu rkbn sd mkx lo pex! |
+| opdncpep xles td nslwwpyrtyr, mfe hspy jzf hzcv slco te nly mp qfy! |
+| pqeodqfq ymft ue otmxxqzsuzs, ngf itqz kag iadw tmdp uf omz nq rgz! |
+| qrfpergr zngu vf punyyratvat, ohg jura lbh jbex uneq vg pna or sha! |
+| rsgqfshs aohv wg qvozzsbuwbu, pih kvsb mci kcfy vofr wh qob ps tib! |
+| sthrgtit bpiw xh rwpaatcvxcv, qji lwtc ndj ldgz wpgs xi rpc qt ujc! |
+| tuishuju cqjx yi sxqbbudwydw, rkj mxud oek meha xqht yj sqd ru vkd! |
+| uvjtivkv drky zj tyrccvexzex, slk nyve pfl nfib yriu zk tre sv wle! |
+| vwkujwlw eslz ak uzsddwfyafy, tml ozwf qgm ogjc zsjv al usf tw xmf! |
+| wxlvkxmx ftma bl vateexgzbgz, unm paxg rhn phkd atkw bm vtg ux yng! |
+| xymwlyny gunb cm wbuffyhacha, von qbyh sio qile bulx cn wuh vy zoh! |
+| yznxmzoz hvoc dn xcvggzibdib, wpo rczi tjp rjmf cvmy do xvi wz api! |
+| zaoynapa iwpd eo ydwhhajcejc, xqp sdaj ukq skng dwnz ep ywj xa bqj! |
+| abpzobqb jxqe fp zexiibkdfkd, yrq tebk vlr tloh exoa fq zxk yb crk! |
+| bcqapcrc kyrf gq afyjjclegle, zsr ufcl wms umpi fypb gr ayl zc dsl! |
+| cdrbqdsd lzsg hr bgzkkdmfhmf, ats vgdm xnt vnqj gzqc hs bzm ad etm! |
+| descrete math is challenging, but when you work hard it can be fun! |
+| eftdsfuf nbui jt dibmmfohjoh, cvu xifo zpv xpsl ibse ju dbo cf gvo! |
+| fguetgvg ocvj ku ejcnngpikpi, dwv yjgp aqw yqtm jctf kv ecp dg hwp! |
+
+
+
+
+
+
+
+
+
 ** Vigenere Cipher
 *** Implementation - ELISP
 #+BEGIN_SRC elisp
@@ -875,13 +930,275 @@ int main()
 
 *** Nicodemus - Taylor Matheny and Ryan Davis
     -Research
+       To explain how this cipher works we will use the word "math" as our key and "we love 
+    descrete math with brother benning and brother neff" as our text. first we put our text into 
+    rows using the size of our key as the number of columns (see table 1). Then you change the
+    order of the columns based on alphebetical order of the key. For our example we have a and so 
+    that will be the new first column(see table 2). The we use a viginere cipher on each letter in
+    the column using the key column letter as our shift (see table 3). 
     
+Tables
+| 1 |   |   |   | -------- | 2 |   |   |   | -------- | 3 |   |   |   |
+| m | a | t | h | -------- | a | h | m | t | -------- | a | h | m | t |
+| - | - | - | - |          | - | - | - | - |          | - | - | - | - |
+| w | e | l | o |          | e | o | w | l |          | e | v | i | e |
+| v | e | d | e |          | e | e | v | d |          | e | l | h | w |
+| s | c | r | e |          | c | e | s | r |          | c | l | e | k |
+| t | e | m | a |          | e | a | t | m |          | e | h | f | f |
+| t | h | w | i |          | h | i | t | w |          | h | p | f | p |
+| t | h | b | r |          | h | r | t | b |          | h | y | f | u |
+| o | t | h | e |          | t | e | o | h |          | t | l | a | a |
+| r | b | e | n |          | b | n | r | e |          | b | u | d | x |
+| n | i | n | g |          | i | g | n | n |          | i | n | z | g |
+| a | n | d | b |          | n | b | a | d |          | n | i | m | w |
+| r | o | t | h |          | o | h | r | t |          | o | o | d | m |
+| e | r | n | e |          | r | e | e | n |          | r | l | q | g |
+| f | f |   |   |          | f |   | f |   |          | f |   | r |   |
+
+       After making these tables you take letters of the columns in table 3 in groups of 5 from 
+    left to right. Table 3 ordered would be as follows:
+      "eeceh vllhp iheff ewkfp htbin yluni fadzm uaxgw orfol dqrmg"
+
     -Theory
+       This Cipher combines the vigenere Cipher with column transposition to create more complex 
+    ecryption. It uses a symetric key in the form of a word. Other than how to preform the 
+    encryption, little is known about it. The math involved in a block cipher like this is pretty 
+    minimal. calculating the size of the block based on the key and plain text involves basic 
+    arithmatic. 
     
     -Implementation
+#+BEGIN_SRC elisp
+(defun nicodemus-encrypt (key plain)
+       (setq i 0)
+       (setq plainlistns '())
+       (setq asciiv (mapcar 'vector (downcase plain)))
+       (setq ascii (mapcar (lambda (arg) (elt arg 0)) asciiv)) 
+       (while (< i (length ascii))
+          (if (/= (elt ascii i) 32) 
+             (setq plainlistns (append plainlistns (list (elt ascii i)))))
+          (incf i)
+       )
+       (setq keylist (mapcar 'string key))
+       (setq keyvec (mapcar 'vector (mapcar 'downcase key)))
+       (setq keyvecnum (mapcar (lambda (arg) (- (elt arg 0) 97)) keyvec)) 
+      
+ 
+       (setq keynum 0)
+       (setq block (list (list 0)))
+       (while (< keynum (length keylist))
+          
+
+          (setq temp (list (elt keylist keynum)))
+          (setq num 0)
+          (while (< num (length plainlistns))     
+             (if (= (% num (length keylist)) keynum) 
+             (setq temp (append temp (list (elt plainlistns num)))))
+             (incf num)
+          )
+          (setq tempshift 
+             (mapcar 
+                (lambda (arg) 
+                   (+ 97 (% (+ (- arg 97) (elt keyvecnum keynum)) 26))) 
+             (cdr temp)))
+
+          (setq block (append block (list tempshift)))
+          temp
+          (incf keynum)
+       )
+       (setq block (cdr block))
+       
+       (setq i 0)
+       (setq keyord '())
+       (while (< i (length keyvecnum))
+          (setq j 0)
+          (setq lt 0)
+          (while (< j (length keyvecnum))
+             (if (> (elt keyvecnum i) (elt keyvecnum j)) (incf lt))
+             (incf j)
+          )
+          (setq j 0)
+          (setq dup 0)
+          (while (< j i)
+             (if (= (elt keyord j) lt) (incf lt))
+             (incf j)
+          ) 
+          (setq keyord (append keyord (list lt)))
+          (incf i)
+       )
+
+       (setq i 0)
+       (setq blockord (list 32))
+       (while (< i (length keyord))
+          (setq j 0)
+          (while (< j (length keyord))
+             (if (= (elt keyord j) i) (setq element j))
+             (incf j)
+          )
+          (setq blockord (append blockord (list (elt block element))))
+       (incf i)
+       )
+       (setq blockord (cdr blockord)) 
+       blockord
+       
+      
+       (setq i 0)
+       (setq temp '())
+       (while (< i (/ (length plainlistns) 5) )
+          (setq temp (append temp (list 32)))
+          (setq j 0)
+          (setq k (% i (length keyord)))
+          (while (< j 5)
+             (while (and (> (length (elt blockord k)) 0) (< j 5))
+                (setq temp (append temp (list (pop (elt blockord k)))))
+                (incf j))
+             (incf k))
+           (incf i)
+        )
+       (setq ciphid (mapcar (lambda (arg) (vector arg)) (cdr temp)))
+       (setq ciph (mapconcat 'identity ciphid ""))
+       ciph
+;block
+
+)
+;(list (list 1 2 3 4) (list 5 6 7 8))
+(nicodemus-encrypt "math" "we love descrete math with brother benning and brother neff")
+
+#+END_SRC
+
+#+RESULTS:
+: eeceh vllhp iheff ewkfp htbin yluni fadzm uaxgw orfol dqrmg
+
 
 ** RSA
 *** Implementation (C++ or Python)
+#+BEGIN_SRC elisp :results silent
+(defun gcd (x y)
+   (while (/= (* x y) 0)
+      (setq x (% x y))
+      (if (/= x 0) (setq y (% y x))))
+   (if (/= x 0)
+   (setq gcd x)
+   (setq gcd y))
+gcd
+)
+
+(defun RSA-key () 
+   (setq primes (number-sequence 2 200 1))
+   (setq i 0)
+   (while (< i (length primes))
+      (setq j 2)
+      (while (< j (length primes))
+         (delete (* (elt primes i) j) primes)
+         (incf j))
+   (incf i)
+   )
+(setq p (elt primes (random (length primes))))
+(setq q (elt primes (random (length primes))))
+(setq n (* p q))
+(setq ET (* (- p 1) (- q 1)))
+(setq e (- ET 5))
+(while (and (< e ET) (/= (gcd e ET) 1))
+   (setq e (random ET)))
+
+(setq a ET)
+(setq b e)
+(setq y 2)
+(setq xlog '())
+(while (/= y 1)
+   (setq y (% a b))
+   (setq x (- (/ a b) (/ (% a b) b)))  
+   ;(setq log (append log (list (list a b x y))))
+   (setq xlog (append (list x) xlog))
+   (setq a b)
+   (setq b y)
+)
+
+(setq d (pop xlog))
+(setq dl 1)
+(setq i (length xlog))
+(setq log2 (list '()))
+(while (> i 0)
+   (setq dn (+ (* (pop xlog) d) dl))
+   (setq dl d)
+   (setq d dn)
+   (setq log2 (append log2 (list (list d))))
+   (setq i (- i 1))
+)
+(if (= (% (length log2) 2) 1)
+   (setq d (- ET d)))
+
+(setq key (list (list "e" "d" "n") (list e d n)))
+key
+)
+;(RSA-key)
+#+END_SRC
+
+#+BEGIN_SRC elisp :results silent 
+(defun RSA (e n plain)
+   (setq i 0)
+   (setq plainlistns plain)
+   ;(setq asciiv (mapcar 'vector (downcase plain)))
+   ;(setq ascii (mapcar (lambda (arg) (elt arg 0)) asciiv)) 
+   ;(while (< i (length ascii))
+      ;(if (/= (elt ascii i) 32) 
+        ; (setq plainlistns (append plainlistns (list (- (elt ascii i) 97)))))
+      ;(incf i)
+  ; )  
+   (setq i 0)
+   (setq crypt '())
+   
+   
+(setq test '())
+   (while (< i (length plainlistns))
+      (setq j 0)
+      (setq x 1)
+      (setq etemp e)
+      (if (< e 12)
+         (setq x (% (expt (elt plainlistns i) e) n))
+         (while (> etemp 0)
+            (if (> etemp 1)
+               (setq x (* x (% (expt (elt plainlistns i) 2) n)))
+               (setq x (* x (% (expt (elt plainlistns i) etemp) n))))
+            (setq x (% x n))
+(setq test (append test (list x)))
+            (setq etemp (- etemp 2)) 
+         ))
+      (setq crypt (append crypt (list x)))
+      (incf i)
+   )
+   (setq disp (append (list plainlistns) (list crypt)))
+   disp
+
+
+)
+;(RSA 1069 1349 '(5 4 1 2 8 5 8 9 2 0))
+#+END_SRC
+
+#+BEGIN_SRC elisp
+(RSA-key)
+#+END_SRC
+
+#+RESULTS:
+|   e |  d |   n |
+| 191 | 39 | 394 |
+
+#+BEGIN_SRC elisp
+(RSA 191 394 '(5 4 1 2 8 5 8 9 2 0))
+#+END_SRC
+
+#+RESULTS:
+|   5 |  4 | 1 |   2 |   8 |   5 |   8 |   9 |   2 | 0 |
+| 321 | 96 | 1 | 314 | 200 | 321 | 200 | 309 | 314 | 0 |
+
+#+BEGIN_SRC elisp
+(RSA 39 394 '(321 96 1 314 200 321 200 309 314 0))
+#+END_SRC
+
+#+RESULTS:
+| 321 | 96 | 1 | 314 | 200 | 321 | 200 | 309 | 314 | 0 |
+|   5 |  4 | 1 |   2 |   8 |   5 |   8 |   9 |   2 | 0 |
+
+
 *** Questions with Solutions
 *** Key Terms
 *** Examples
