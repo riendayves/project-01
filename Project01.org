@@ -843,7 +843,7 @@ int main()
     the column using the key column letter as our shift (see table 3). 
 
 | ---table 1--- | -------- | ---table 2--- | -------- | ---table 3--- |
-
+-----------------------------------------------------------------------
 | m | a | t | h | -------- | a | h | m | t | -------- | a | h | m | t |
 | - | - | - | - |          | - | - | - | - |          | - | - | - | - |
 | w | e | l | o |          | e | o | w | l |          | e | v | i | e |
