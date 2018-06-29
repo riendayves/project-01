@@ -246,12 +246,12 @@ Contributors: Paul Land, Nicki Caswell, Kathryn Hollingshead, Ryan Davis
 #+END_SRC
 
 #+BEGIN_SRC elisp :results output
-(print(passwordCheck "@ApplesAuce20&"))
+(print(passwordCheck "123123123123123"))
 #+END_SRC
 
 #+RESULTS:
 : 
-: "Very Strong Password"
+: "Very weak password"
 
 ** Caesar Cipher
 *** Implementation - ELISP
@@ -434,7 +434,7 @@ print(plain_text)
     Before we show how to generate the values for e and d, we need to define
     the \phi function, or Euler's Totient Function:
 ********* \phi(n) = (p - 1)(q - 1)
-********** This function gives the number of positvie integers not exceeding n that are coprime to n
+********** This function gives the number of positive integers not exceeding n that are coprime to n
 
     Now to select a value for e, we must follow this rule:
 ********* gcd(e, \phi(n)) = 1
@@ -1344,7 +1344,69 @@ key
 
 
 *** Questions with Solutions
-*** Key Terms
+*** Key Terms and Number Theory Rules
+
+***** Prime Number
+      - An integer x is prime if x \gt 1 and the only factors of x are 1 and x.
+
+***** Greatest Common Divisor of Two Integers
+      - The greatest common divisor of integers a and b is the largest number
+        that divides both a and b. It is denoted as gcd(a, b).
+
+***** Coprime/Relatively Prime
+      - Two integers x and y and considered coprime, or relatively prime, if
+        they have no common factors besides one. In other words, x and y are
+        coprime iff gcd(x, y) = 1.
+
+***** a | b
+      - Where a and b are both integers, this means that a divides b, or that 
+        b is divisible by a. This means that there exists an integer k such that 
+        a = bk.
+
+***** mn | a
+      - For any integers m and n, if mn | a then m | a and n | a.
+
+***** a = b mod n
+      - This defines a binary operation where a is equal to the remainder from 
+        dividing b by n, where 0 \le a \lt n.
+
+***** a \equiv b (mod n)
+      - This mean that integers a and b have the same remainder when being
+        divided by n. We can also change this to the following:
+           1. n | a - b
+           2. a - b = nk, for some integer k
+      - a is congruent to b modulo n
+      - a mod n = b mod n
+
+***** Properties of Congruence
+      - For a specific integer n and any integers a, b, c, and d, the 
+        following is true:
+        1. a \equiv a (mod n)
+        2. a \pm b \equiv b \pm a (mod n)
+        3. ab \equiv ba (mod n)
+        4. abc \equiv (ab)c \equiv a(bc) (mod n)
+        5. If a \equiv b (mod n) then b \equiv a (mod n)
+        6. If a \equiv b (mod n) and b \equiv c (mod n) then a \equiv c (mod n)
+        7. If a \equiv b (mod n) and c \equiv d (mod n) then a \pm c \equiv b \pm d (mod n)
+           and ac \equiv bd (mod n).
+        8. If a \equiv b (mod n) then a^r \equiv b^r (mod n) for any integer r \ge 1.
+        9. a \equiv 0 (mod n) iff n | a.
+
+***** Modulo with coprimes
+      - If integers m and n are coprime and a \equiv b (mod m) and a \equiv b (mod n)
+        then a \equiv b (mod mn).
+
+***** Euler's Totient Function (\phi(n))
+      - This function returns the number of positive integers not exceeding n
+        which are coprime to n.
+      - For all prime numbers p, \phi(p) = p - 1.
+      - If m and n are comprime, then \phi(m)\phi(n) = \phi(mn).
+
+***** Fermat's Little Theorem
+      - For any prime number p and any integer a,
+        a^p \equiv a (mod p).
+      - If gcd(a, p) = 1, then a^(p-1) \equiv 1 (mod p)
+
 *** Examples
 
 ** AES
