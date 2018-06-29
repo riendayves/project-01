@@ -1345,6 +1345,20 @@ crypt
 
 
 *** Questions with Solutions
+
+    1. Using RSA. Given: p=3, q=7, e=5, Φ(n) = 24. Find the cipher text for Justin.
+
+    2. Using RSA. Given: p=5, q=7, e=7, d = 7. Find the cipher text for Bengtson. 
+
+    3. Using RSA. Given p=11, q=13, e=11. Find the cipher text for Nicki.
+
+    Solutions (Encrypted):
+    
+    1. J = 18, u = 20, s = 9, t = 10, i = 8 & n = 13
+    2. B = 1, e = 4, n = 27, g = 6, t = 19, s = 32, o = 14, & n =27
+    3. N = 13, i = 96, c = 46, k = 43, & i = 8
+
+
 *** Key Terms and Number Theory Rules
 
 ***** Prime Number
@@ -1409,6 +1423,201 @@ crypt
       - If gcd(a, p) = 1, then a^(p-1) \equiv 1 (mod p)
 
 *** Examples
+
+    RSA Example
+
+    Given p = 11, q = 5, and e = 7. 
+
+    Find the totient = Φ(n)) = (p -1)(q-1)
+    Find d in order to decrypt =  (d = e * d mod(Φ(n)) = 1) 
+
+    Use RSA to Encrypt & Decrypt “hide” where (h = 7, i = 8, d = 3, e = 4)
+
+    Ex. d = (7 * d (mod(40) = 1)
+
+    7d mod 40 = 1 (Ask yourself what e * d  would make “modding” it by the totient be 1?)
+
+    n = p * q
+    n = 55
+
+    C = Ciphertext, M = plaintext
+
+    h: C = h^7 mod n
+
+    h: 7^7 mod 55
+
+    [(7^1 mod 55) * (7^3 mod 55) * (7^3 mod 55)] mod 55
+
+    [(7) * (13) * (13)] mod 55
+
+    7 * 13 = 91
+
+    Remember to mod by n after each step!
+
+    91 % 55 = 36
+
+    [36 * 13] mod 55
+
+    36 * 13 = 468
+
+    468 mod 55 = 28
+
+    [28] mod 55 = 28
+
+    h encrypted is 28!
+
+    i: 8^7 mod 55
+
+    [(8^1 mod 55) * (8^2 mod 55) * (8^2 mod 55) * (8^2 mod 55)] mod 55
+
+    [8 * 9 * 9 * 9] mod 55
+
+    8 * 9 mod 55
+
+    72 mod 55 = 17
+    [17 * 9 * 9] mod 55
+
+    17 * 9 mod 55
+    
+    143 mod 55 = 43
+
+    [43 * 9] mod 55
+
+    387 mod 55 = 2
+
+    i encrypted is 2!
+
+    d: 3^7 mod 55
+
+    [(3^4 mod 55) * (3^3 mod 55)] mod 55
+
+    81 mod 55 = 26 
+    27 mod 55 = 27
+
+    [(26 * 27)] mod 55
+
+    702 mod 55 = 42
+
+    d encrypted is 42!
+
+    e: 47 mod 55
+
+    [(43 mod 55) * (43 mod 55) * (4 mod 55)] mod 55
+
+    (9 * 9 * 4) mod 55
+
+    9 * 9 = 81
+
+    81 mod 55 = 36
+
+    26 * 4 = 144
+
+    104 mod 55 = 49
+
+    e encrypted is 49!
+
+    Decryption: cd mod n (For decrypting make c the encrypted 28) 
+
+    h: 2823 mod 55 
+
+    h = [(28^3 mod 55) * (28^3 mod 55) * (28^3 mod 55) * (28^3 mod 55) * (28^3 mod 55) * (28^3 mod 55) * (28^3 mod 55) * (28^2 mod 55)] mod 55
+
+    28^3 = 21952
+    28^2 = 784
+
+    21952 mod 55 = 7
+    784 mod 55 = 14
+
+    [7 * 7 * 7 * 7 * 7 * 7 * 7 * 14] mod 55
+
+    [7^3 ] mod 55 = 13 (Repeat 2x)
+
+    [13 * 13 * 7 * 14] mod 55
+
+    13 * 13 = 169
+
+    169 mod 55 = 4
+
+    [4 * 7 * 14] mod 55
+
+    4 * 7 * 14 mod 55 = 7
+
+    h is decrypted to 7! 
+
+    (Notice that was the original value of h, all decryption values should go back to their original values)
+
+    i: 2^23 mod 55
+
+    [(2^6 mod 55) * (2^6 mod 55) * (2^6 mod 55) * (2^5 mod 55)] mod 55
+
+    [9 * 9 * 9 * 32] mod 55
+
+    9 * 9 = 81
+
+    81 mod 55 = 26
+
+    [26 * 9 * 32] mod 55
+
+    26 * 9 = 234
+    234 mod 55 = 14
+
+    [14 * 32] mod 55
+
+    32 * 14 = 448
+
+    448 % 55 = 8
+    i is 8!
+    d: 4223 mod 55 =
+    [(42^3 mod 55) * (42^3 mod 55) * (42^3 mod 55) * (42^3 mod 55) * (42^3 mod 55) * (42^3 mod 55) * (42^3 mod 55) * (42^2 mod 55)] mod 55
+
+    42^3 = 74088
+    42^2 = 1764
+    74088 mod 55 = 3
+    1764 mod 55 = 4
+    [3 * 3 * 3 * 3 * 3 * 3 * 3 * 4] mod 55
+    3*3*3*3 = 81
+    81 mod 55 = 26
+    [26 3 * 3 * 3 * 4] mod 55
+    26 * 3 = 78
+    78 mod 55 = 23
+    [23 * 3 * 3 * 4] mod 55
+    23 * 3 = 69
+    69 mod 55 = 14
+    [14 * 3 * 4] mod 55
+    14 * 3 * 4 = 168
+    168 mod 55 = 3
+    d is decrypted back to 3.
+
+    e = 49^23 mod 55
+    [(49^3 mod 55) * (49^3 mod 55) * (49^3 mod 55) * (49^3 mod 55) * (49^3 mod 55) * (49^3 mod 55) * (49^3 mod 55) * (49^2 mod 55)] mod 55
+    [4 * 4 * 4 * 4 * 4 * 4 * 4 * 36] mod 55
+    4 * 4 * 4 = 64
+    64 mod 55 = 9 (Repeat 2x)
+    [9 * 9 * 4 * 36] mod 55
+    9 * 9 = 81
+    81 mod 55 = 26
+    [26 * 4 * 36] mod 55
+    26 * 4 * 36 = 3744
+    3744 mod 55 = 4
+
+    e is 4! 
+
+    Answers (Encrypted): h: 28, i:2, d:42, e: 49
+
+    We have successfully encrypted and decrypted the word “hide” using RSA! Now try a few on your own! (For all questions assume the initial value for each letter to increment ex. a = 0, b = 1, c = 2 etc..)
+
+    *** Questions With Solutions
+
+    1. Using RSA. Given: p=3, q=7, e=5, Φ(n) = 24. Find the cipher text for Justin.
+
+    2. Using RSA. Given: p=5, q=7, e=7, d = 7. Find the cipher text for Bengtson. 
+
+    3. Using RSA. Given p=11, q=13, e=11. Find the cipher text for Nicki.
+
+    Solutions (Encrypted):
+    1. J = 18, u = 20, s = 9, t = 10, i = 8 & n = 13
+    2. B = 1, e = 4, n = 27, g = 6, t = 19, s = 32, o = 14, & n =27
+    3. N = 13, i = 96, c = 46, k = 43, & i = 8
 
 ** AES
    *What is this and how does it work?*
